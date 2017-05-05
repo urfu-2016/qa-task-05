@@ -1,1 +1,22 @@
 /* Стили для пятнашек опишите в этом файле */
+.grid {
+    border: 1px solid black;
+    width: 172px; 
+}
+
+.grid-row {
+    padding: 0;
+    margin: 0;
+}
+
+.grid-cell {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    background-color: brown;
+}
+
+.empty {
+    background-color: gray;
+}
