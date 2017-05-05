@@ -9,9 +9,12 @@
     <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
 </head>
 <body>
-    <!-- Начальное состояние для игры "Пятнашки" формируем здесь -->
+    <main id="cells-board" class="cells">
+        <div id="hidden-cell" class="cell cell-hidden"></div>
+    </main>
 
-    <!-- Тестовый отчет будет формироваться на основании этого элемента -->
+    <p id="victory" class="victory">Victory!</p>
+
     <div id="mocha"></div>
 
     <!-- Подключаем внешние библиотеки с CDN чтобы можно было смотреть домашку прямо с GitHub -->
