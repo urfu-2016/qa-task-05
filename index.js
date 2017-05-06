@@ -44,8 +44,7 @@ function createSpecksInContainer(container, specksValues) {
 }
 
 function onSpeckClick(event) {
-    var field = document.getElementsByClassName('field')[0];
-    var specks = Array.prototype.slice.call(field.childNodes, 0);
+    var specks = getDocumentSpecks();
     var i = specks.indexOf(event.target);
     if (i - 4 >= 0 && specks[i - 4].innerHTML === "") {
         swapElementsInnerHTML(specks[i], specks[i - 4]);
@@ -58,6 +57,18 @@ function onSpeckClick(event) {
     }
     else if (i % 4 !== 3 && specks[i + 1].innerHTML === "") {
         swapElementsInnerHTML(specks[i], specks[i + 1])
+    }
+    checkForWin();
+}
+
+function getDocumentSpecks() {
+    var field = document.getElementsByClassName('field')[0];
+    return Array.prototype.slice.call(field.childNodes, 0);
+}
+
+function checkForWin(specks) {
+    if (specks === undefined) {
+        specks = getDocumentSpecks();
     }
     if (isPlayerWin(specks)) {
         document.getElementsByClassName('congratulation')[0].removeAttribute('hidden');
@@ -85,3 +96,4 @@ function swapElementsInnerHTML(first, second) {
 }
 
 initField();
+checkForWin();
