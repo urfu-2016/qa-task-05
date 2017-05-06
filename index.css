@@ -31,3 +31,7 @@
 .congratulation {
     margin-top: 10px;
 }
+
+.congratulation_hidden {
+    visibility: hidden;
+}

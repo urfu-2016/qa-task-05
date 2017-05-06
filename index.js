@@ -71,7 +71,8 @@ function checkForWin(specks) {
         specks = getDocumentSpecks();
     }
     if (isPlayerWin(specks)) {
-        document.getElementsByClassName('congratulation')[0].removeAttribute('hidden');
+        document.getElementsByClassName('congratulation')[0]
+            .classList.remove('congratulation_hidden');
         specks.forEach(function (speck) {
             speck.removeEventListener('click', onSpeckClick);
             speck.classList.add('field__speck_disabled');
@@ -82,7 +83,6 @@ function checkForWin(specks) {
 function isPlayerWin(specks) {
     for (var i = 0; i < specks.length - 1; i++) {
         if (Number(specks[i].innerHTML) !== i + 1) {
-            console.log("not yet" + i);
             return false;
         }
     }
