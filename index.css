@@ -1,1 +1,33 @@
-/* Стили для пятнашек опишите в этом файле */
+.field {
+    display: flex;
+    width: 200px;
+    height: 200px;
+    flex-wrap: wrap;
+}
+
+.field__speck {
+    flex-basis: 24%;
+    width: 25%;
+    height: 25%;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 25px;
+    vertical-align: middle;
+    line-height: 50px;
+}
+
+.field__speck:hover {
+    cursor: pointer;
+}
+
+.field__speck_disabled {
+    background-color: gray;
+}
+
+.field__speck_disabled:hover {
+    cursor: default;
+}
+
+.congratulation {
+    margin-top: 10px;
+}
