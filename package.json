@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "lint": "eslint .",
-    "test": "eslint . && mocha-phantomjs -p node_modules/.bin/phantomjs index.html"
+    "test": "mocha-phantomjs -p node_modules/.bin/phantomjs index.html"
   },
   "author": "Sergey Zhigalov <zhigalov@yandex-team.ru>",
   "license": "MIT",

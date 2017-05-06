@@ -1,9 +1,10 @@
 .cells
 {
     position: relative;
+    float: left;
     width: 400px;
     height: 400px;
-    margin: 20px;
+    margin: 20px 30px 20px 20px;
     background-color: #dfdfdf;
 }
 
@@ -40,7 +41,7 @@
 .victory
 {
     display: inline-block;
-    margin: 20px;
+    margin: 50px 0 0;
     font: 70px Times, sans-serif;
     color: #0f0;
     text-shadow: 4px 4px #ff0, -4px -4px #ff0;
