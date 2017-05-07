@@ -1,22 +1,55 @@
 /* Стили для пятнашек опишите в этом файле */
-.grid {
+.board
+{
     border: 1px solid black;
-    width: 172px; 
+    border-radius: 5px;
+    display: inline-block;
+    padding: 2px;
+    background-color: #ccccb3;
 }
 
-.grid-row {
+.row
+{
     padding: 0;
     margin: 0;
 }
 
-.grid-cell {
+.tile 
+{
     display: inline-block;
-    width: 30px;
-    height: 30px;
-    margin: 5px;
-    background-color: brown;
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    margin: 1px;
+    background-color: #a3a375;
+    text-align: center;
+    color:  #0f0f0a;
+    font: 600 1.5em /50px DigiGraphics;
+    cursor: default;
 }
 
-.empty {
+.tile:hover
+{
+    background-color: #999966;
+}
+
+.empty
+{
+    visibility: hidden;
+}
+
+.empty:hover
+{
     background-color: gray;
+}
+
+.result
+{
+    font: 600 2em DigiGraphics;
+}
+
+@font-face
+{
+    font-family: DigiGraphics;
+    src: url(fonts/DigiGraphics.ttf) format('truetype');
 }
