@@ -1,4 +1,3 @@
-/* Стили для пятнашек опишите в этом файле */
 .board
 {
     border: 1px solid black;
@@ -36,11 +35,6 @@
 .empty
 {
     visibility: hidden;
-}
-
-.empty:hover
-{
-    background-color: gray;
 }
 
 .result
