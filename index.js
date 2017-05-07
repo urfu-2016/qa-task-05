@@ -79,20 +79,30 @@ function Game() {
     }
 
     this.shuffle = function() {
-        for (var i = 0; i < 10000; i++) {
+        for (var i = 0; i < 1000; i++) {
             this.performRandomMove();
         }
+
+        for (var j = 0; j < BOARD_SIZE; j++) {
+            this.perfomVerticalMove(1);
+            this.performHorizontalMove(1);  
+    };
+
+    this.perfomVerticalMove = function(direction) {
+        this.tryMove(this.zero.row - direction, this.zero.collumn);
+    };
+
+    this.performHorizontalMove = function(direction) {
+        this.tryMove(this.zero.row, this.zero.collumn - direction);
     };
 
     this.performRandomMove = function() {
         var isVertical = Math.round(Math.random());
         var direction = Math.round(Math.random()) ? 1 : -1;
 
-        if (isVertical) {
-            this.tryMove(this.zero.row + direction, this.zero.collumn);
-        } else {
-            this.tryMove(this.zero.row, this.zero.collumn + direction);
-        }
+        isVertical 
+            ? this.perfomVerticalMove(direction)
+            : this.performHorizontalMove(direction);
     };
 }
 
