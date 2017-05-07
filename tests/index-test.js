@@ -57,6 +57,8 @@ describe('Gempuzzle ui tests', function() {
 
             var resultText = document.getElementById('result').innerText;
             resultText.should.be.equal('Winnner!');
+        }catch (err) {
+            throw err;
         } finally {
             game.isCompleted = realIsCompleted;
         }
