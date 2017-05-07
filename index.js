@@ -26,7 +26,7 @@ function swapCells(nextCell, targetCell) {
 function makeMove(event) {
     var e = event || window.event;
     var targetCell = e.target || e.srcElement;
-    if (targetCell.tagName != 'INPUT') {
+    if (targetCell.tagName !== 'INPUT') {
         return; 
     }
     var playGround = document.getElementById('playground');
