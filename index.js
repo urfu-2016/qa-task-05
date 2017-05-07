@@ -4,9 +4,9 @@ var BOARD_SIZE = 4;
 
 function View(game) {
     this.render = function() {
-        var puzzle = document.getElementById('gempuzzle');
-        puzzle.innerHTML = '';
-
+        clear();
+        
+        var puzzle = document.getElementById('puzzle');
         for (var row = 0; row < BOARD_SIZE; row++) {
             var rowDiv = document.createElement('div');
             rowDiv.className = 'row';
@@ -24,6 +24,11 @@ function View(game) {
             result.innerText = 'Winnner!';
         }
     };
+
+    function clear() {
+        document.getElementById('puzzle').innerHTML = '';
+        document.getElementById('result').innerHTML = '';
+    }
 
     function createTileElement(number) {
         var tile = document.createElement('div');
@@ -85,7 +90,8 @@ function Game() {
 
         for (var j = 0; j < BOARD_SIZE; j++) {
             this.perfomVerticalMove(1);
-            this.performHorizontalMove(1);  
+            this.performHorizontalMove(1);
+        }
     };
 
     this.perfomVerticalMove = function(direction) {

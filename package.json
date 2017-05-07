@@ -13,7 +13,7 @@
     "chai": "^3.5.0",
     "eslint": "^3.19.0",
     "mocha": "3.3.0",
-    "mocha-phantomjs": "4.1.0",
-    "phantomjs": "2.1.7"
+    "mocha-phantomjs": "^4.1.0",
+    "phantomjs": "^2.1.7"
   }
 }
