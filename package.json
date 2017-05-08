@@ -4,11 +4,13 @@
   "description": "Пятнашки",
   "main": "index.html",
   "scripts": {
+    "lint": "eslint .",
     "test": "mocha-phantomjs -p node_modules/.bin/phantomjs index.html"
   },
   "author": "Sergey Zhigalov <zhigalov@yandex-team.ru>",
   "license": "MIT",
   "devDependencies": {
+    "eslint": "^3.19.0",
     "mocha": "3.3.0",
     "mocha-phantomjs": "4.1.0",
     "phantomjs": "2.1.7"
