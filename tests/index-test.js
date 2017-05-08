@@ -4,12 +4,23 @@ describe('Tag', function() {
     var click = document.createEvent('Events');
     click.initEvent('click', true, false);
 
+    beforeEach(function () {
+        var hiddenCell = document.getElementById('hidden-cell');
+        var victory = document.getElementById('victory');
+        var cells = [].slice.call(document.getElementsByClassName('cell'));
+        victory.style.visibility = 'hidden';
+        hiddenCell.style.left = '0';
+        hiddenCell.style.top = '0';
+        shuffle(cells);
+        assignCells(cells);
+    });
+
     it('should generate 15 visible numbered cells', function() {
         var cells = [].slice.call(document.getElementsByClassName('cell'));
 
-        chai.assert.equal(cells.filter(function (item) {
+        chai.expect(cells.filter(function (item) {
             return item.id !== 'hidden-cell';
-        }).length, 15);
+        })).to.have.length(15);
         for (var i = 1; i <= 15; i++) {
             chai.expect(document.getElementById('' + i)).to.be.not.an('undefined');
         }
@@ -18,8 +29,7 @@ describe('Tag', function() {
     it('should move neighbour cell on empty on click in horizontal directions', function() {
         var hiddenCell = document.getElementById('hidden-cell');
         var neighbour = [].slice.call(document.getElementsByClassName('cell')).filter(function (cell) {
-            return cell.style.top === hiddenCell.style.top
-                && parseInt(cell.style.left) - parseInt(hiddenCell.style.left) === 25;
+            return cell.style.top === '0%' && cell.style.left === '25%';
         })[0];
 
         neighbour.dispatchEvent(click);
@@ -33,8 +43,7 @@ describe('Tag', function() {
     it('should move neighbour cell on empty on click in vertical directions', function() {
         var hiddenCell = document.getElementById('hidden-cell');
         var neighbour = [].slice.call(document.getElementsByClassName('cell')).filter(function (cell) {
-            return cell.style.left === hiddenCell.style.left
-                && parseInt(cell.style.top) - parseInt(hiddenCell.style.top) === 25;
+            return cell.style.left === '0%' && cell.style.top === '25%';
         })[0];
 
         neighbour.dispatchEvent(click);
