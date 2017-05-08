@@ -96,6 +96,8 @@ function getNeighbourCells(cellNumber) {
 
 function setupGame() {
     var playGround = document.getElementById('playground');
+    var winMessage = document.getElementById('win-message');
+    winMessage.style.visibility = 'hidden';
     var buttons = [];
     for (var i = 0; i < 16; i++) {
         var button = getButton(i);
