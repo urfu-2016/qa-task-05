@@ -30,7 +30,7 @@ function makeMove(event) {
         return; 
     }
     var playGround = document.getElementById('playground');
-    var cells = playGround.getElementsByTagName('input');
+    var cells = playGround.getElementsByClassName('button');
     var winMessage = document.getElementById('win-message');
     var nextCellId = getNextCellId(targetCell.id, cells);
     if (nextCellId !== -1) {
@@ -80,16 +80,16 @@ function getSolvableCombination() {
 function getNeighbourCells(cellNumber) {
     var neighbourCells = [];
     if (cellNumber - 1 >= 0 && cellNumber % 4 !== 0) {
-        neighbourCells.push(cellNumber - 1);
+        neighbourCells.push(parseInt(cellNumber - 1));
     }
     if (cellNumber + 1 < 16 && (cellNumber + 1) % 4 !== 0) {
-        neighbourCells.push(cellNumber + 1);
+        neighbourCells.push(parseInt(cellNumber + 1));
     }
     if (cellNumber - 4 >= 0) {
-        neighbourCells.push(cellNumber - 4);
+        neighbourCells.push(parseInt(cellNumber - 4));
     }
     if (cellNumber + 4 < 16) {
-        neighbourCells.push(cellNumber + 4);
+        neighbourCells.push(parseInt(cellNumber + 4));
     }
     return neighbourCells;
 }
