@@ -1,1 +1,8 @@
-/* Стили для пятнашек опишите в этом файле */
+.victoryMessage
+{
+	visibility: hidden;
+	position: absolute;
+	left: 500px;
+	font: 100px Sans;
+	color: #B41A1A;
+}
