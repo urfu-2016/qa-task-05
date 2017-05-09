@@ -22,6 +22,10 @@ describe('Game tests', function () {
 
     });
 
+    it('should don`t move cell', function () {
+
+    });
+
     it('should execute win action after move cell', function () {
 
     });
