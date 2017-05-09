@@ -29,6 +29,10 @@
     background-color: rgb(50, 200, 200);
     cursor: pointer;
     z-index: 1;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .cell:hover {
@@ -43,7 +47,10 @@
     color: white;
     cursor: default;
     z-index: 0;
-    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .won {
