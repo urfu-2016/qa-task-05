@@ -1,1 +1,46 @@
-/* Стили для пятнашек опишите в этом файле */
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.game-field {
+    margin: 100px 0 0;
+    border: solid 5px black;
+    opacity: 0;
+}
+
+.row {
+    display: flex;
+}
+
+.cell {
+    position: relative;
+    display: flex;
+    margin: 1px;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    border: solid 1px black;
+    font-size: 30px;
+    text-align: center;
+    box-sizing: border-box;
+    background-color: rgb(50, 200, 200);
+    cursor: pointer;
+    z-index: 1;
+}
+
+.cell:hover {
+    background-color: rgb(50, 230, 230);
+}
+
+.space,
+.space:hover {
+    position: relative;
+    background-color: white;
+    border: none;
+    color: white;
+    cursor: default;
+    z-index: 0;
+    pointer-events: none;
+}
