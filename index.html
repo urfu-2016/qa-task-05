@@ -10,12 +10,15 @@
 </head>
 <body>
     <!-- Начальное состояние для игры "Пятнашки" формируем здесь -->
+    <div class="game"></div>
+    <div class="winningLogo">!Ты выиграЛ!</div>
 
     <!-- Тестовый отчет будет формироваться на основании этого элемента -->
     <div id="mocha"></div>
 
     <!-- Подключаем внешние библиотеки с CDN чтобы можно было смотреть домашку прямо с GitHub -->
     <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+    <script src="http://chaijs.com/chai.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js"></script>
 
     <!-- Подключаем реализацию пятнашек -->
