@@ -1,4 +1,5 @@
 .container {
+    position: relative;
     display: flex;
     justify-content: center;
 }
@@ -6,7 +7,7 @@
 .game-field {
     margin: 100px 0 0;
     border: solid 5px black;
-    opacity: 0;
+    /*opacity: 0;*/
 }
 
 .row {
@@ -43,4 +44,38 @@
     cursor: default;
     z-index: 0;
     pointer-events: none;
+}
+
+.won {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 1s ease-out;
+    pointer-events: none;
+}
+
+.won__h1 {
+    font-size: 60px;
+    color: rgb(200, 90, 5);
+}
+
+.won__h2 {
+    font-size: 45px;
+}
+
+.won.trigger {
+    opacity: 1;
+}
+
+.won.trigger ~ .game-field {
+    opacity: 0.5 !important;
+    pointer-events: none !important;
 }

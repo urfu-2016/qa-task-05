@@ -4,16 +4,21 @@ var game = {
     init: function () {
         this._collectData();
         this._bindEvenets();
-        this._initField();
+        // this._initField();
     },
 
     _collectData: function () {
+        this.clicked = false;
         this.offset = 102;
         this.$gameField = $('.js-game-field');
         this.$rows = this.$gameField.children();
         this.rowSelector = '.js-row';
         this.cellSelector = '.js-cell';
         this.spaceSelector = '.js-space';
+        this.wonBlock = '.js-won';
+        this.wonClassName = '.won';
+        this.wonAudio = '.js-won-audio';
+        this.wonTrigger = 'trigger';
     },
 
     _bindEvenets: function () {
@@ -60,6 +65,10 @@ var game = {
     },
 
     _clickHandler: function (e) {
+        if (this.clicked) {
+            return;
+        }
+
         var $space = $(this.spaceSelector);
 
         var elemRow = this._detectRow(e.target);
@@ -95,7 +104,10 @@ var game = {
         }
 
         if (offset) {
+            this.clicked = true;
+
             $(e.target).animate(offset, 300, function () {
+                this.clicked = false;
                 this._swap(e.target, $space);
                 this._checkWin();
             }.bind(this));
@@ -131,8 +143,15 @@ var game = {
         });
 
         if (currentCombination.toString() === winCombination.toString()) {
-            console.log('You won !')
+            this._playWonAudio();
         }
+    },
+
+    _playWonAudio: function () {
+        $(this.wonBlock).addClass(this.wonTrigger);
+
+        var audio = $(this.wonAudio)[0];
+        audio.play();
     },
 
     _swap: function (elem_1, elem_2) {
