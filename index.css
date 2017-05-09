@@ -1,4 +1,3 @@
-/* Стили для пятнашек опишите в этом файле */
 html,
 body {
     padding: 0;
@@ -8,10 +7,12 @@ body {
     position: relative;
     width: 400px;
     height: 400px;
+    margin: 100px auto;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#061022), to(#2e052f));
     background-image: linear-gradient(to bottom, #061022, #2e052f);
 }
 
-.specks > span {
+.specks__game-stop {
     position: absolute;
     top: 40%;
     left: 25%;
@@ -24,7 +25,8 @@ body {
     padding: 16px;
     background: rgba(255, 255, 255, .19);
     border: 1px solid #aaa;
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
     cursor: pointer;
     font-size: 3em;
     color: #fff;
@@ -130,4 +132,3 @@ body {
     grid-column: 4;
     grid-row: 4;
 }
-
