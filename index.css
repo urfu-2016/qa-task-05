@@ -1,1 +1,30 @@
-/* Стили для пятнашек опишите в этом файле */
+.main {
+  width: 500px;
+  height: 500px;
+  position: relative;
+
+  left: 50%;
+  //top: 50%;
+  margin-top: 50px;
+  transform: translateX(-50%);
+
+  border: 1px solid black;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.main.end {
+  background-color: red;
+}
+
+.main td {
+  text-align: center;
+  border: 1px solid black;
+
+  font-size: 30px;
+  font-family: sans-serif;
+}
+
+.main td:not(.empty-cell) {
+  background-color: yellowgreen;
+}
