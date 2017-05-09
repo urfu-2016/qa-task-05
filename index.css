@@ -1,1 +1,66 @@
-/* Стили для пятнашек опишите в этом файле */
+.puzzle-box
+{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 60%;
+    height: 840px;
+    border: 2px solid black;
+}
+
+.space
+{
+    font-size: 100px;
+    text-align: center;
+    cursor: pointer;
+    box-sizing: border-box;
+    border: 1px solid black;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    height: 25%;
+    transition-property: transform;
+    transition-duration: 0.3s;
+    background: rgb(255,197,120);
+    background: -moz-radial-gradient(center, ellipse cover,  rgba(255,197,120,1) 0%, rgba(251,157,35,1) 100%);
+    background: -webkit-radial-gradient(center, ellipse cover,  rgba(255,197,120,1) 0%,rgba(251,157,35,1) 100%);
+    background: radial-gradient(ellipse at center,  rgba(255,197,120,1) 0%,rgba(251,157,35,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffc578', endColorstr='#fb9d23',GradientType=1 );
+}
+
+.simple-game
+{
+    width: 8%;
+    height: 40px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #7e92cc;
+    border: 1px solid black;
+    cursor: pointer;
+    position: absolute;
+    top: 5%; 
+    left: 3%;
+    font-size: 150%;
+    border-radius: 5px;
+}
+
+.victory-screen
+{
+    display: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-image: url(https://clck.ru/B77Dt);
+    background-repeat: round;
+    text-align: center;
+    color: white;
+    font-size: 400%;
+    z-index: -1;
+}
