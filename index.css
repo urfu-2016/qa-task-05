@@ -1,1 +1,30 @@
-/* Стили для пятнашек опишите в этом файле */
+#puzzle {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: 50px auto;
+  width: 408px;
+}
+
+#puzzle .element {
+  align-self: center;
+  background: #ccc;
+  cursor: pointer;
+  flex: 0 1 auto;
+  height: 100px;
+  line-height: 100px;
+  margin: 1px;
+  order: 0;
+  text-align: center;
+  vertical-align: middle;
+  width: 100px;
+}
+
+#puzzle .element[data-val='0'] {
+  cursor: default;
+  opacity: 0;
+}
