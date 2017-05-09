@@ -7,9 +7,6 @@ var spacesCurrPositions = [];
 // здесь будут изначальные координаты клеток после их генерации
 var coordinates = {};
 
-// при загрузке страницы сразу генерируем игру
-setOnRandomPositions();
-
 var simpleGame = document.getElementsByClassName('simple-game')[0];
 simpleGame.onclick = function() {
     setOnSimplePositions();
@@ -73,7 +70,6 @@ function removeChildren(elem) {
 
 // простая позиция для проверки победы
 function setOnSimplePositions() {
-    var oldSpaces = document.getElementsByClassName('space');
     var puzzleBox = document.getElementsByClassName('puzzle-box')[0];
     removeChildren(puzzleBox);
     var simplePositions = [1, 2 ,3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 13, 14, 11];
