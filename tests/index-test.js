@@ -14,7 +14,7 @@ describe('Tag', function() {
     var cellsWithoutEmpty = null;
     clearPlayground();
     beforeEach(function () {
-        setupGame();
+        startGame();
         cells = [].slice.call(document.getElementsByClassName('button'));
         hiddenCell = cells.filter(function(item) {
             return parseInt(item.value) === -1;
@@ -27,7 +27,7 @@ describe('Tag', function() {
         clearPlayground();
     });
     after(function () {
-       setupGame();
+       startGame();
     });
 
     it('should generate 15 visible numbered cells', function() {
@@ -66,7 +66,7 @@ describe('Tag', function() {
             [12, 13, 14, 15]
         ];
         clearPlayground();
-        setupGame(board);
+        startGame(board);
         cells = [].slice.call(document.getElementsByClassName('button'));
 
         var neighboursOfHiddenCell = cells.filter(function(item) {
@@ -97,7 +97,7 @@ describe('Tag', function() {
             [12, 13, 14, -1]
         ];
         clearPlayground();
-        setupGame(board);
+        startGame(board);
         cells = [].slice.call(document.getElementsByClassName('button'));
 
         var neighboursOfHiddenCell = cells.filter(function(item) {
@@ -155,7 +155,7 @@ describe('Tag', function() {
             [13, 14, -1, 15]
         ];
         clearPlayground();
-        setupGame(board);
+        startGame(board);
         cells = [].slice.call(document.getElementsByClassName('button'));
         var winMessage = document.getElementById('win');
 

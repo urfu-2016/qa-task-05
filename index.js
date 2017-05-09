@@ -62,12 +62,11 @@ function swap(event) {
     }
 }
 
-
 function compareRandom() {
     return Math.random() - 0.5;
 }
 
-function setupGame(board) {
+function startGame(board) {
     var playGround = document.getElementById('playground');
     var winMessage = document.getElementById('win');
     winMessage.style.visibility = 'hidden';
@@ -115,11 +114,10 @@ function setupGame(board) {
             }
             buttons[i][j] = button;
             playGround.appendChild(button);
-            if ((i*4 +j + 1) % n === 0) {
+            if ((i*4 + j + 1) % n === 0) {
                 playGround.appendChild(document.createElement('br'));
             }
         }
-
     }
 
     if (playGround.addEventListener) {
@@ -129,4 +127,4 @@ function setupGame(board) {
     }
 }
 
-document.body.onload = setupGame();
+document.body.onload = startGame();
