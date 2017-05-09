@@ -13,11 +13,11 @@ describe('Tag', function() {
     it('should contain board with 15 cells and 1-15 numbers', function () {
         var cells = document.getElementsByClassName('text-cell');
         var numbers = [];
-        for (var i=1;i<16;i++) {
+        for (var i = 1; i < 16; i++) {
             numbers.push(i);
         }
         var actualNumbers = [];
-        for (var i=0;i<cells.length;i++) {
+        for (var i = 0; i < cells.length; i++) {
             actualNumbers.push(+cells[i].textContent);
         }
         actualNumbers.sort(function (a, b) {

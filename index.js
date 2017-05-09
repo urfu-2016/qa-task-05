@@ -22,12 +22,12 @@ function printWin() {
 function checkWin(board) {
   var counter = 0;
   var winnerPositions = [];
-  for (var i=1;i<16;i++) {
+  for (var i = 1; i < 16; i++) {
     winnerPositions.push(i);
   }
   winnerPositions.push(0);
-  for (var i=0;i<4;i++) {
-    for (var j=0;j<4;j++) {
+  for (var i = 0; i < 4; i++) {
+    for (var j = 0; j < 4; j++) {
       if (board[i][j] !== winnerPositions[counter]) {
         return false;
       } else {
@@ -42,29 +42,29 @@ function canMoveCell(x, y) {
   if (board[x + 1] && board[x + 1][y] === 0) {
     board[x + 1][y] = board[x][y];
     board[x][y] = 0;
-    return { type: 'bottom' , x: x + 1, y: y}
+    return { type: 'bottom' , x: x + 1, y: y }
   }
   if (board[x - 1] && board[x - 1][y] === 0) {
     board[x - 1][y] = board[x][y];
     board[x][y] = 0;
-    return { type: 'top' , x: x - 1, y: y}
+    return { type: 'top' , x: x - 1, y: y }
   }
   if (board[y + 1] && board[x][y + 1] === 0) {
     board[x][y + 1] = board[x][y];
     board[x][y] = 0;
-    return { type: 'right' , x: x, y: y + 1}
+    return { type: 'right' , x: x, y: y + 1 }
   }
   if (board[y - 1] && board[x][y - 1] === 0) {
     board[x][y - 1] = board[x][y];
     board[x][y] = 0;
-    return { type: 'left' , x: x, y: y - 1}
+    return { type: 'left' , x: x, y: y - 1 }
   }
 }
 
 function clickOnBoard(event) {
   var cellNode = event.target.closest('.cell');
   var cell = cellNode.className.match(/ (.+)/)[1].split('-');
-  var move = canMoveCell(parseInt(cell[0]), parseInt(cell[1]))
+  var move = canMoveCell(parseInt(cell[0]), parseInt(cell[1]));
   var sign = 1;
 
   if (move) {
@@ -129,9 +129,9 @@ function startGame() {
   shuffle(randoms);
   randoms.unshift(0);
   board = []
-  for (var i=1;i<=4;i++) {
+  for (var i = 1; i <= 4; i++) {
     board[i - 1] = []
-    for (var j=1;j<=4;j++) {
+    for (var j = 1; j <= 4; j++) {
       board[i - 1][j - 1] = randoms[4 * (i - 1) + (j - 1)];
     }
   }
