@@ -15,7 +15,7 @@ describe('Game tests', function () {
         }, {});
 
         chai.assert.equal(counter.elems, 16);
-        chai.assert.equal(counter.sum, 120);
+        chai.assert.equal(counter.sum, 137);
     });
 
     it('should move cell', function () {

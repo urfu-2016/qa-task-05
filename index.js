@@ -4,7 +4,7 @@ var game = {
     init: function () {
         this._collectData();
         this._bindEvenets();
-        // this._initField();
+        this._initField();
     },
 
     _collectData: function () {
