@@ -10,7 +10,8 @@
 </head>
 <body>
     <!-- Начальное состояние для игры "Пятнашки" формируем здесь -->
-
+    <div id="game-field"></div>
+    <div id="winner-note">You won!</div>>
     <!-- Тестовый отчет будет формироваться на основании этого элемента -->
     <div id="mocha"></div>
 
@@ -20,7 +21,6 @@
 
     <!-- Подключаем реализацию пятнашек -->
     <script src="./index.js"></script>
-
     <!-- Конфигурируем и запускаем тесты -->
     <script>mocha.setup('bdd')</script>
     <script src="./tests/index-test.js"></script>
