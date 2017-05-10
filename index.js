@@ -11,7 +11,7 @@ function initGameField() {
         element.setAttribute('value', cells[i]);
         element.addEventListener('click', onClick);
         field.appendChild(element);
-        if (i === 0)
+        if (cells[i] === -1)
             element.style.visibility = 'hidden';
         if ((i + 1) % 4 === 0) {
             field.appendChild(document.createElement('br'));
@@ -19,9 +19,9 @@ function initGameField() {
     }
 }
 
-function isEnd() {
-    for (var i = 0; i < cells.length - 1; i++) {
-        if (parseInt(cells[i].value) !== i + 1)
+function isEnd(array) {
+    for (var i = 0; i < array.length - 1; i++) {
+        if (parseInt(array[i].value) !== i + 1)
             return false;
     }
     return true;
@@ -32,15 +32,12 @@ function swapCells(current, target) {
     target.value = current.value;
     current.value = -1;
     current.style.visibility = 'hidden';
-    var t = parseInt(current.value);
-    cells[cells.indexOf(parseInt(current.value))] = target.value;
-    cells[cells.indexOf(parseInt(target.value))] = t;
+
 }
 
 function getShuffledField() {
     cells = shuffleArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
     cells.unshift(-1);
-
 }
 
 function shuffleArray(cells) {
@@ -56,18 +53,22 @@ function shuffleArray(cells) {
 function onClick(event) {
     var field = document.getElementById('game-field');
     var htmlCells = field.getElementsByClassName('cell');
-    var currentID = cells.indexOf(parseInt(event.target.value));
-    if (parseInt(htmlCells[currentID - 1].value) === -1)
-        swapCells(htmlCells[currentID], htmlCells[currentID - 1]);
-    if (parseInt(htmlCells[currentID + 1].value) === -1)
-        swapCells(htmlCells[currentID], htmlCells[currentID + 1]);
-    if (parseInt(htmlCells[currentID - 4].value) === -1)
-        swapCells(htmlCells[currentID], htmlCells[currentID - 4]);
-    if (parseInt(htmlCells[currentID + 4].value) === -1)
-        swapCells(htmlCells[currentID], htmlCells[currentID + 4]);
-    if (isEnd()) {
+    var array = Array.prototype.slice.call(htmlCells, 0);
+    var currentID = array.indexOf(event.target);
+    if (currentID - 1 >= 0 && currentID % 4 !== 0 && array[currentID - 1].value === '-1')
+        swapCells(array[currentID], array[currentID - 1]);
+    else if (currentID + 1 <= 15 && currentID + 1 !== 0 && array[currentID + 1].value === '-1')
+        swapCells(array[currentID], array[currentID + 1]);
+    else if (currentID - 4 >= 0 && array[currentID - 4].value === '-1')
+        swapCells(array[currentID], array[currentID - 4]);
+    else if (currentID + 4 <= 15 && array[currentID + 4].value === '-1')
+        swapCells(array[currentID], array[currentID + 4]);
+    if (isEnd(array)) {
         var note = document.getElementById('winner-note');
-        note.setAttribute('visibility', 'visible');
+        note.style.visibility = 'visible';
+        array.forEach(function (element) {
+            element.disabled = true;
+        })
     }
 }
 
