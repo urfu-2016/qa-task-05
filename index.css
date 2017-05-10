@@ -1,1 +1,20 @@
 /* Стили для пятнашек опишите в этом файле */
+#winner-note {
+    visibility: hidden;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    background-color: #aaaaaa;
+    margin: 1px;
+}
+
+.cell:hover {
+    background-color: #84aeff;
+    cursor: pointer;
+}
+
+#game-field {
+    padding: 10px;
+}
