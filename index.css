@@ -1,1 +1,25 @@
-/* Стили для пятнашек опишите в этом файле */
+#game {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 209px;
+    background: #CD853F;
+}
+
+#game .tile {
+    background: #FFD700;
+    cursor: pointer;
+    flex: 0 1 auto;
+    margin: 1px;
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    text-align: center;
+    vertical-align: middle;
+ }
+
+ game .tile-hidden {
+    cursor: default;
+    opacity: 0;
+ }
