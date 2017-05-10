@@ -4,19 +4,19 @@ printBoard();
 gameBoardElement.addEventListener('click', function (event) {
     move(event.target.id);
     if (checkWin()) {
-        alert('Победа');
+        document.querySelector('.game-victory').style.display = 'block';
     }
 });
 
 
 function createBoard() {
-    var barleyBreak = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].sort(function () {
+    var gameBoard = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].sort(function () {
         return Math.random() - 0.5;
     });
 
-    barleyBreak.unshift(0);
+    gameBoard.unshift(0);
 
-    return barleyBreak;
+    return gameBoard;
 }
 
 function printBoard() {
