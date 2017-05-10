@@ -1,1 +1,43 @@
-/* Стили для пятнашек опишите в этом файле */
+.cells
+{
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 10px;
+    background: #fff;
+    font-size: 30px;
+}
+
+.block 
+{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000675; 
+    box-sizing: border-box;
+    box-shadow: 0 0 4px #000675;
+}
+
+.cell
+{
+    width: 23%;
+    height: 23%;
+    background: #fff;
+    transition: .5s ease;
+    animation: sw 1s;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.win-message
+{
+    top: 0;
+    bottom: 0;
+    height: 15%;
+    margin: auto;
+    background: #fff;
+    right: 0;
+    left: 0;
+    width: 60%;
+}
