@@ -1,7 +1,8 @@
 .game-board
 {
-    border-collapse: collapse;
     border: solid 1px;
+    width: 400px;
+    height: 400px;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
@@ -11,18 +12,22 @@
 .game-cell
 {
     border: solid 1px;
-    width: 66px;
-    height: 66px;
+    width: 100px;
+    height: 100px;
     text-align: center;
     font-size: 24px;
     cursor: pointer;
     background-color: #000;
-    color: #fff
+    color: #fff;
+    display: inline-block;
+    box-sizing: border-box;
+    line-height: 100px;
 }
 
 .game-cell.empty
 {
     background: #fff;
+    color: #fff;
 }
 
 .game-victory

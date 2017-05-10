@@ -1,6 +1,6 @@
-var gameBoard = createBoard();
+var gameBoard;
 var gameBoardElement = document.getElementById('game-board');
-printBoard();
+
 gameBoardElement.addEventListener('click', function (event) {
     move(event.target.id);
     if (checkWin()) {
@@ -8,6 +8,13 @@ gameBoardElement.addEventListener('click', function (event) {
     }
 });
 
+startNewGame();
+
+function startNewGame() {
+    document.querySelector('.game-victory').style.display = 'none';
+    gameBoard = createBoard();
+    printBoard();
+}
 
 function createBoard() {
     var gameBoard = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].sort(function () {
@@ -23,16 +30,12 @@ function printBoard() {
     while (gameBoardElement.firstChild) {
         gameBoardElement.removeChild(gameBoardElement.firstChild);
     }
-    for (var i = 0; i < 4; i++) {
-        gameBoardElement.appendChild(document.createElement('tr'));
-        for (var j = 0; j < 4; j++) {
-            var gameBoardLine = document.querySelector('#game-board tr:last-of-type');
-            var gameElement = document.createElement('td');
-            gameElement.id = (i * 4 + j).toString();
-            gameElement.innerHTML = gameBoard[i * 4 + j] === 0 ? '' : gameBoard[i * 4 + j];
-            gameElement.className = gameBoard[i * 4 + j] === 0 ? 'game-cell empty' : 'game-cell';
-            gameBoardLine.appendChild(gameElement);
-        }
+    for (var i = 0; i < 16; i++) {
+        var gameCell = document.createElement('div');
+        gameCell.id = i;
+        gameCell.innerHTML = gameBoard[i];
+        gameCell.className = gameBoard[i] === 0 ? 'game-cell empty' : 'game-cell';
+        gameBoardElement.appendChild(gameCell);
     }
 }
 
