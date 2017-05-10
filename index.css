@@ -1,1 +1,22 @@
 /* Стили для пятнашек опишите в этом файле */
+#winner-note {
+    visibility: hidden;
+    font: 30px sans-serif;
+    text-align: center;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    background-color: #c1c1c1;
+    margin: 1px;
+}
+
+.cell:hover {
+    background-color: #9db6f2;
+    cursor: pointer;
+}
+
+#game-field {
+    padding: 10px;
+}
