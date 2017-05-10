@@ -93,13 +93,6 @@ function SpotsGame()
         return true;
     };
 
-    this.victoryWithArray = function(array)
-    {
-        if (Array.isArray(array))
-            arr = array;
-            this.victory();
-    };
-
     this.mix = function(stepCount)
     {
         var x,y;
@@ -152,5 +145,10 @@ function SpotsGame()
     this.getArray = function ()
     {
         return arr;
-    }
+    };
+
+    this.setArray = function (array)
+    {
+        arr = array;
+    };
 }
