@@ -1,1 +1,35 @@
 /* Стили для пятнашек опишите в этом файле */
+body, html {
+    height: 100%;
+}
+
+#playground {
+    padding: 12px 64px;
+}
+
+#win {
+    margin: 0;
+    font-size: 50px;
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    color: #0B614B;
+    visibility: hidden;
+}
+
+.button {
+    background-color: #81F7BE;
+    color: black;
+    text-align: center;
+    display: inline-block;
+    margin: 2px 2px;
+    height: 60px;
+    width: 60px;
+    font-size: 20px;
+    cursor: pointer;
+
+}
+
+.button:hover {
+    background-color: #0B614B;
+}
