@@ -1,19 +1,16 @@
 // Логику пятнашек нужно описать в этом файле
-// Логику пятнашек нужно описать в этом файле
-var VICTORY = [];   
+var VICTORY = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0]; 
 var CURRENT_PLAY = [];
 
 
 function newGame() {
     document.getElementById('board').innerHTML = '';
     document.getElementById('victory').innerHTML = '';
-    var cells = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0];
-    VICTORY = cells.slice();   
-    CURRENT_PLAY = mix(cells);
+    CURRENT_PLAY = shuffle(VICTORY.slice());
     draw();
 }
 
-function mix(arr) {
+function shuffle(arr) {
     return arr.sort(function() { 
         return Math.random() - 0.5; 
     })

@@ -2,9 +2,7 @@ chai.should();
 
 
 describe('Tag', function() {
-	beforeEach(function () {
-		newGame();
-    });
+	beforeEach(newGame);
 
     it('check the format of the cells', function () {
     	document.getElementById('board').childElementCount.should.be.equal(16);
@@ -19,7 +17,16 @@ describe('Tag', function() {
     it('must draw cell movement', function () {
         var indexEmpty = CURRENT_PLAY.indexOf(0);
         var empty = document.getElementById('board').childNodes[indexEmpty];
-        empty.click();
+        try {
+            var notEmpty = document.getElementById('board').childNodes[indexEmpty+1];
+            notEmpty.click();
+        }
+        catch (err) {
+            var notEmpty = document.getElementById('board').childNodes[indexEmpty-1];
+            notEmpty.click();
+        } finally {
+            notEmpty.innerHTML.should.be.equal(CURRENT_PLAY[indexEmpty].toString());
+        }
     });
 
     it('should not draw a "Победа!"', function () {
@@ -29,20 +36,15 @@ describe('Tag', function() {
     });
 
     it('should draw "Победа!" when game victory', function () {
-    	try {
-	    	newGame();
-	        CURRENT_PLAY = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 0, 15];
-		    draw();
-	        document.getElementById('board').childNodes[15].click();
+        document.getElementById('board').innerHTML = '';
+        CURRENT_PLAY = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 0, 15];
+	    draw();
+        document.getElementById('board').childNodes[15].click();
 
-	        var victory = document.getElementById('victory');
-	        victory.innerText.should.be.equal('Победа!');
-    	}
-    	catch (err) {
-    		 throw err;
-    	} finally {
-    		newGame();
-    	}
+        var victory = document.getElementById('victory');
+        victory.innerText.should.be.equal('Победа!');
+
+		newGame();
     })
 
 });
