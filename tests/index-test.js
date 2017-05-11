@@ -2,16 +2,16 @@ chai.should();
 
 
 describe('Tag', function() {
-	beforeEach(newGame);
+    beforeEach(newGame);
 
     it('check the format of the cells', function () {
-    	document.getElementById('board').childElementCount.should.be.equal(16);
+        document.getElementById('board').childElementCount.should.be.equal(16);
 
-	    for (var i = 1; i < 16; i++) {
-	        var currentcell = document.getElementById('board').childNodes[i];
-	        currentcell.innerHTML.should.be.equal(CURRENT_PLAY[i].toString());
-	        currentcell.className.should.be.contains('cell');
-	    }
+        for (var i = 1; i < 16; i++) {
+            var currentcell = document.getElementById('board').childNodes[i];
+            currentcell.innerHTML.should.be.equal(CURRENT_PLAY[i].toString());
+            currentcell.className.should.be.contains('cell');
+        }
     });
 
     it('must draw cell movement', function () {
@@ -38,13 +38,12 @@ describe('Tag', function() {
     it('should draw "Победа!" when game victory', function () {
         document.getElementById('board').innerHTML = '';
         CURRENT_PLAY = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 0, 15];
-	    draw();
+        draw();
         document.getElementById('board').childNodes[15].click();
 
         var victory = document.getElementById('victory');
         victory.innerText.should.be.equal('Победа!');
 
-		newGame();
+        newGame();
     })
-
 });
