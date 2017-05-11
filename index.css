@@ -1,1 +1,23 @@
-/* Стили для пятнашек опишите в этом файле */
+.field {
+    margin: 20px auto 0;
+    width: 456px;
+    background-color: #FBFBFB;
+    border: solid 1px black;
+}
+
+.tile {
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+    display: inline-block;
+    font: bold 24px/100px Tahoma,sans;
+    text-align: center;
+    border: solid 2px gray;
+    border-radius: 20px;
+    background-color: whitesmoke;
+}
+
+.win {
+    font-size: 30px;
+    text-align: center;
+}
