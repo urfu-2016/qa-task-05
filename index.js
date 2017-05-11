@@ -20,28 +20,25 @@ function onTileClick(event) {
 
     var index = tiles.map(function (el) {return el.textContent;}).indexOf(clickedTile.textContent);
     if (index + 4 < 16 && tiles[index + 4].textContent === "0") swapTiles(clickedTile, tiles[index + 4]);
-    if (index + 1 < 16 && tiles[index + 1].textContent === "0") swapTiles(clickedTile, tiles[index + 1]);
-    if (index - 4 > 0 && tiles[index - 4].textContent === "0") swapTiles(clickedTile, tiles[index - 4]);
-    if (index - 1 > 0 && tiles[index - 1].textContent === "0") swapTiles(clickedTile, tiles[index - 1]);
+    else if (index - 4 >= 0 && tiles[index - 4].textContent === "0") swapTiles(clickedTile, tiles[index - 4]);
+    else if (index % 4 !== 3 && tiles[index + 1].textContent === "0") swapTiles(clickedTile, tiles[index + 1]);
+    else if (index % 4 !== 0 && tiles[index - 1].textContent === "0") swapTiles(clickedTile, tiles[index - 1]);
 
     if (isWin(tiles)) {
         document.getElementsByClassName("win")[0].style.display = "block";
         document.getElementsByClassName("field")[0].style.backgroundColor = "lime";
-        tiles.forEach(function (tile) {
-            tile.removeEventListener("click", onTileClick);
-        });
+        tiles.forEach(function (tile) {tile.removeEventListener("click", onTileClick);});
     }
 }
 
 function drawField() {
     var field = document.getElementsByClassName("field")[0];
-    while (field.firstChild) {
-        field.removeChild(field.firstChild);
-    }
+    while (field.firstChild) field.removeChild(field.firstChild);
     document.getElementsByClassName("win")[0].style.display = "none";
     document.getElementsByClassName("field")[0].style.backgroundColor = "#FBFBFB";
 
-    var order = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].sort(function () {return Math.random() - .5;}).concat(0);
+    var shuffle = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].sort(function () {return Math.random() - .5;});
+    var order = [0].concat(shuffle);
     for (var i = 0; i < 16; i++) {
         var tile = document.createElement("div");
         tile.classList.add("tile");
