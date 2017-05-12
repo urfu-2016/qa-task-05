@@ -1,1 +1,19 @@
 /* Стили для пятнашек опишите в этом файле */
+.field {
+    background-color: #808080;
+}
+
+.elem {
+    width: 60px;
+    height: 60px;
+    background-color: #ffd700;
+    cursor: default;
+    font-size: 40px;
+}
+
+.reset-button {
+    margin-left: 80px;
+    margin-top: 20px;
+    width: 100px;
+    height: 30px;
+}
