@@ -1,35 +1,28 @@
 'use strict';
+
 chai.should();
 
 describe('Tag', function() {
-    it('should show 16 cells', function () {
-        let cells = document.getElementsByClassName('elem');
-        cells.should.have.length(16);
+    it('should show 16 tiles', function () {
+        let tiles = document.getElementsByClassName('cell');
+        tiles.should.have.length(16);
     });
 
-    it('should create cells with one empty element', function () {
-        let cells = [].slice.call(document.getElementsByClassName('elem'));
-        cells = cells.filter(function (cell) {
-            return cell.textContent === "";
-        });
-        cells.should.have.length(1);
+    it('should move cell, which has empty near', function () {
+        let hole = game.field.indexOf(0);
+        let elemPosition = hole - 4 >= 0 ? hole - 4 : hole + 4;
+        chai.expect(game.move(game.field[elemPosition])).to.be.true;
     });
 
-    it('should move cell', function () {
-        let empty = findEmptyElement(mainField);
-        let elemPosition = getNeighbors(empty)[0];
-        let id = elemPosition.x * 4 + elemPosition.y;
-        trySwap(id.toString());
-        chai.assert.equal(mainField[elemPosition.x][elemPosition.y], 0);
+    it('should not move cell, which has not empty near', function () {
+        let hole = game.field.indexOf(0);
+        let elemPosition = hole - 5 >= 0 ? hole - 5 : hole + 5;
+        chai.expect(game.move(game.field[elemPosition])).to.be.false;
+        drawer.rePaint();
     });
 
-    it('should be victory', function() {
-        let field = [
-            [1, 2, 3, 4],
-            [5, 6, 7, 8],
-            [9, 10, 11, 12],
-            [13, 14, 15, 0]
-        ];
-        chai.expect(isGameOver(field)).to.be.true;
+    it('should be victory', function () {
+        let game = new Game();
+        chai.expect(game.isVictory()).to.be.true;
     });
 });
