@@ -100,7 +100,7 @@ function Drawer(game) {
         }
         console.log(value);
         let cell = document.createElement('div');
-        cell.className = 'cell';
+        cell.className = 'tile';
         cell.textContent = value;
         cell.id = id.toString();
         cell.addEventListener('click', function () {
