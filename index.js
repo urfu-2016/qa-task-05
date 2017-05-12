@@ -1,7 +1,9 @@
 
 initGame(document.getElementsByClassName('game')[0]);
 
-function initGame(divToInsert) {
+function initGame(divToInsert, valuesArr) {
+    document.getElementsByClassName('winningLogo')[0].style.display = 'none';
+
     var cells = [];
     var sections = [];
     var values = [];
@@ -17,19 +19,33 @@ function initGame(divToInsert) {
             div.setAttribute('x', i);
             div.setAttribute('y', j);
             div.setAttribute('onclick', 'tryToMove(this)');
-            if (i === 0 && j === 0){
+            if (i === 0 && j === 0 && valuesArr == undefined){
                 div.setAttribute('id', 'empty');
                 cells[i][j] = div;
                 section.appendChild(div);
                 continue;    
             }
-            var ind = Math.round(Math.random()*(values.length-1));
-            var a = values.splice(ind, 1);
+            if (valuesArr == undefined){
+                var ind = Math.round(Math.random()*(values.length-1));
+                var a = values.splice(ind, 1);
+            }
+            else
+            { 
+                var a = valuesArr.shift()
+                if (a == 0){
+                    div.setAttribute('id', 'empty');
+                    cells[i][j] = div;
+                    section.appendChild(div);
+                    continue;
+                }
+
+            }
             div.innerHTML = a;
             section.appendChild(div);
             cells[i][j] = div;
         }
     }
+    divToInsert.innerHTML = '';
     for (var i = 0; i < sections.length; i++){
         divToInsert.appendChild(sections[i]);
         divToInsert.cells = cells;

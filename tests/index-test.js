@@ -1,3 +1,4 @@
+
 describe('Tag', function() {
 
     it('should change nothing when empty cell is clicked', () =>{
@@ -64,6 +65,19 @@ describe('Tag', function() {
         chai.assert.equal(currCoords.x, prevCoords.x - dX);
         chai.assert.equal(currCoords.y, prevCoords.y);
 
+    });
+
+    it('should show player`s winning when right combination is figured out', () =>{
+
+        initGame(document.getElementsByClassName('game')[0], [1,0,2,3,4,5,6,7,8,9,10,11,12,13,14,15])
+
+        var cells = document.getElementsByClassName('game')[0].cells;
+        cells[0][0].dispatchEvent(new MouseEvent('click'));
+        
+        var winningLogo = document.getElementsByClassName('winningLogo')[0];
+        chai.assert.equal(winningLogo.style.display, "block");
+
+        initGame(document.getElementsByClassName('game')[0])
     });
 
 });
