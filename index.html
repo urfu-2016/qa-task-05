@@ -10,7 +10,33 @@
 </head>
 <body>
     <!-- Начальное состояние для игры "Пятнашки" формируем здесь -->
-
+    <table id="field" class="field">
+        <tr>
+            <th id="0" class="elem" onclick="trySwap(id)"></th>
+            <th id="1" class="elem" onclick="trySwap(id)"></th>
+            <th id="2" class="elem" onclick="trySwap(id)"></th>
+            <th id="3" class="elem" onclick="trySwap(id)"></th>
+        </tr>
+        <tr>
+            <th id="4" class="elem" onclick="trySwap(id)"></th>
+            <th id="5" class="elem" onclick="trySwap(id)"></th>
+            <th id="6" class="elem" onclick="trySwap(id)"></th>
+            <th id="7" class="elem" onclick="trySwap(id)"></th>
+        </tr>
+        <tr>
+            <th id="8" class="elem" onclick="trySwap(id)"></th>
+            <th id="9" class="elem" onclick="trySwap(id)"></th>
+            <th id="10" class="elem" onclick="trySwap(id)"></th>
+            <th id="11" class="elem" onclick="trySwap(id)"></th>
+        </tr>
+        <tr>
+            <th id="12" class="elem" onclick="trySwap(id)"></th>
+            <th id="13" class="elem" onclick="trySwap(id)"></th>
+            <th id="14" class="elem" onclick="trySwap(id)"></th>
+            <th id="15" class="elem" onclick="trySwap(id)"></th>
+        </tr>
+    </table>
+    <button id="reset" class="reset-button" onclick="main()">Shuffle</button>
     <!-- Тестовый отчет будет формироваться на основании этого элемента -->
     <div id="mocha"></div>
 
