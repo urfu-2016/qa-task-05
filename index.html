@@ -9,7 +9,9 @@
     <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
 </head>
 <body>
+    <button class="new-game" onclick="startGame()">Новая игра</button>
     <!-- Начальное состояние для игры "Пятнашки" формируем здесь -->
+    <table class="main"></table>
 
     <!-- Тестовый отчет будет формироваться на основании этого элемента -->
     <div id="mocha"></div>
@@ -17,6 +19,7 @@
     <!-- Подключаем внешние библиотеки с CDN чтобы можно было смотреть домашку прямо с GitHub -->
     <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
     <!-- Подключаем реализацию пятнашек -->
     <script src="./index.js"></script>
