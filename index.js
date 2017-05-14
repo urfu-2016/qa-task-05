@@ -2,8 +2,8 @@
 var app = (function() {
     var generateCells = function() {
         var specksBlock = document.createDocumentFragment();
-        var nums = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
-        var randomNums = nums.slice().sort(function() {
+        var numbers = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+        var randomNumbers = numbers.slice().sort(function() {
             return .5 - Math.random();
         });
         /** Add clear block */
@@ -13,12 +13,12 @@ var app = (function() {
         specksItemNone.style.gridRow = 1;
         specksBlock.appendChild(specksItemNone);
 
-        nums.forEach(function(item, ind) { 
+        numbers.forEach(function(item, ind) { 
             var newSpecksItem = document.createElement('div');
             newSpecksItem.addEventListener('click', handlerClick)
             newSpecksItem.className = 'specks__item';
-            newSpecksItem.style.gridColumn = randomNums[ind] === 16 ? 1 : parseInt(randomNums[ind] / 4, 10) + 1;
-            newSpecksItem.style.gridRow = randomNums[ind] === 16 ? 2 :parseInt(randomNums[ind] % 4, 10) + 1;
+            newSpecksItem.style.gridColumn = randomNumbers[ind] === 16 ? 1 : parseInt(randomNumbers[ind] / 4, 10) + 1;
+            newSpecksItem.style.gridRow = randomNumbers[ind] === 16 ? 2 :parseInt(randomNumbers[ind] % 4, 10) + 1;
             newSpecksItem.innerHTML = (item === 16) ? 1 : item;
             newSpecksItem.setAttribute('value', (item === 16) ? 1 : item);
             specksBlock.appendChild(newSpecksItem);
@@ -27,12 +27,12 @@ var app = (function() {
     }
 
     var isValidCheck = function(el1, el2) {
-            var colEl1 = +el1.style.gridColumn[0];
-            var colEl2 = +el2.style.gridColumn[0];
-            var rowEl1 = +el1.style.gridRow[0];
-            var rowEl2 = +el2.style.gridRow[0];
-            return (Math.abs(colEl1 - colEl2) === 1 && Math.abs(rowEl1 - rowEl2) === 0)
-                || (Math.abs(colEl1 - colEl2) === 0 && Math.abs(rowEl1 - rowEl2) === 1);
+        var colEl1 = +el1.style.gridColumn[0];
+        var colEl2 = +el2.style.gridColumn[0];
+        var rowEl1 = +el1.style.gridRow[0];
+        var rowEl2 = +el2.style.gridRow[0];
+        return (Math.abs(colEl1 - colEl2) === 1 && Math.abs(rowEl1 - rowEl2) === 0)
+            || (Math.abs(colEl1 - colEl2) === 0 && Math.abs(rowEl1 - rowEl2) === 1);
     }
     var moveSpecksBlocks = function(el1, el2) {
         var gridRow = el1.style.gridRow;

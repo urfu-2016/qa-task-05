@@ -1,12 +1,20 @@
 describe('specks game test', function() {
 
-    afterEach(function() {
+    function resetState() {
         var specks = document.querySelector('.specks');
         while (specks.firstChild) {
             specks.removeChild(specks.firstChild);
         }
         app.init();
-    })
+    }
+
+    beforeEach(function() {
+        resetState();
+    });
+
+    after(function() {
+        resetState();
+    });
 
     it('should generate 15 specks block', function() {
         var specksBlocks = document.querySelectorAll('.specks__item');
@@ -68,4 +76,47 @@ describe('specks game test', function() {
 
     });
 
+    describe('check move blocks', function() {
+        function checkMove(isShouldMove) {
+            var specksBlocks = document.querySelectorAll('.specks__item');
+            var specksItemNone = document.querySelector('.specks__item--hidden');
+            var colEl2 = +specksItemNone.style.gridColumn[0];
+            var rowEl2 = +specksItemNone.style.gridRow[0];
+            var newColEl1, newRowEl1;
+            for (var i = 1; i < specksBlocks.length; i++) {
+                var colEl1 = +specksBlocks[i].style.gridColumn[0];
+                var rowEl1 = +specksBlocks[i].style.gridRow[0];
+                var flag = ((Math.abs(colEl1 - colEl2) === 1 && Math.abs(rowEl1 - rowEl2) === 0)
+                || (Math.abs(colEl1 - colEl2) === 0 && Math.abs(rowEl1 - rowEl2) === 1));
+                flag = isShouldMove ? flag : !flag;
+                if (flag) {
+                    specksBlocks[i].click();
+                    valueEl = specksBlocks[i].innerHTML;
+                    newColEl1 = +specksBlocks[i].style.gridColumn[0];
+                    newRowEl1 = +specksBlocks[i].style.gridRow[0];
+                    break;  
+                }
+            }
+            if (isShouldMove) {
+                chai.assert.equal(colEl2, newColEl1);
+                chai.assert.equal(rowEl2, newRowEl1);
+                chai.assert.equal(+specksItemNone.style.gridColumn[0], colEl1);
+                chai.assert.equal(+specksItemNone.style.gridRow[0], rowEl1);
+            } else {
+                chai.assert.equal(colEl1, newColEl1);
+                chai.assert.equal(rowEl1, newRowEl1);
+                chai.assert.equal(+specksItemNone.style.gridColumn[0], colEl2);
+                chai.assert.equal(+specksItemNone.style.gridRow[0], rowEl2);
+            }
+        }
+
+        it('should move block after click', function() {
+            checkMove(true);
+        });
+
+        it('should not move block after click', function() {
+            checkMove(false);
+        });
+        
+    })
 });
