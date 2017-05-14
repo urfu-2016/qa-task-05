@@ -4,6 +4,10 @@ function getCell(x, y) {
     return $('.main td[data-position="' + x + '_' + y + '"]');
 }
 
+function getCellText(x, y) {
+    return getCell(x, y).text();
+}
+
 describe('Tag', function () {
     var puzzles = null;
 
@@ -14,52 +18,41 @@ describe('Tag', function () {
             [null,10,9,1],
             [8,2,4,15]
         ];
-    });
 
-    after(function () {
-        startGame();
+        startGame(puzzles);
     });
 
     it('should show puzzles content', function () {
-        startGame(puzzles);
-
         function stringify(value) {
             return value
                 ? value.toString()
                 : '';
         }
 
-        for (var i = 0; i < puzzles.length; i ++) {
-            for (var j = 0; j < puzzles[i].length; j++) {
-                expect(getCell(i, j).text()).to.equal(stringify(puzzles[i][j]));
+        for (var i = 0; i < 4; i ++) {
+            for (var j = 0; j < 4; j++) {
+                var actual = getCellText(i, j);
+                var expected = stringify(puzzles[i][j]);
+
+                expect(actual).to.equal(expected);
             }
         }
     });
 
     it('should move chip after click on neighbour cell', function () {
-        startGame(puzzles);
-
         getCell(1, 0).trigger('click');
 
-        expect(getCell(2, 0).text()).to.equal('12');
-        expect(getCell(1, 0).text()).to.be.empty;
+        expect(getCellText(2, 0)).to.equal('12');
+        expect(getCellText(1, 0)).to.be.empty;
         expect(getCell(1, 0).hasClass('empty-cell')).to.be.true;
-
-        getCell(1, 1).trigger('click');
-
-        expect(getCell(1, 0).text()).to.equal('7');
-        expect(getCell(1, 1).text()).to.be.empty;
-        expect(getCell(1, 1).hasClass('empty-cell')).to.be.true;
     });
 
     it('should not do anything after click on no-neighbour cell', function () {
-        startGame(puzzles);
-
         function checkClickDoNothing(x, y, expectedValue) {
             getCell(x, y).trigger('click');
 
-            expect(getCell(x, y).text()).to.equal(expectedValue);
-            expect(getCell(2, 0).text()).to.be.empty;
+            expect(getCellText(x, y)).to.equal(expectedValue);
+            expect(getCellText(2, 0)).to.be.empty;
         }
 
         checkClickDoNothing(1, 1, '7');
@@ -68,15 +61,13 @@ describe('Tag', function () {
     });
 
     it('should not do anything after click on empty cell', function () {
-        startGame(puzzles);
-
         getCell(2, 0).trigger('click');
 
-        expect(getCell(2, 0).text()).to.be.empty;
+        expect(getCellText(2, 0)).to.be.empty;
     });
 
     it('should add class `end` after game`s end', function () {
-        puzzles = [
+        var puzzles = [
             [1,null,2,3],
             [4,5,6,7],
             [8,9,10,11],

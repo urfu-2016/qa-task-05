@@ -153,7 +153,7 @@ function switchValues(puzzle, pos1, pos2) {
 }
 
 function isGameEnd(puzzle) {
-    var oldValue = -Infinity;
+    var oldValue = 0;
 
     for (var i = 0; i < puzzle.length; i++) {
         for (var j = 0; j < puzzle[i].length; j++) {
