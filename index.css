@@ -1,1 +1,134 @@
-/* Стили для пятнашек опишите в этом файле */
+html,
+body {
+    padding: 0;
+}
+
+.specks {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 100px auto;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#061022), to(#2e052f));
+    background-image: linear-gradient(to bottom, #061022, #2e052f);
+}
+
+.specks__game-stop {
+    position: absolute;
+    top: 40%;
+    left: 25%;
+    color: #fff;
+    font-size: 3em;
+}
+
+.specks__item {
+    margin: 5px;
+    padding: 16px;
+    background: rgba(255, 255, 255, .19);
+    border: 1px solid #aaa;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    cursor: pointer;
+    font-size: 3em;
+    color: #fff;
+    text-align: center;
+}
+
+.specks__item:hover {
+    background: rgba(255, 255, 255, .3);
+}
+
+.specks__item.game-finish {
+    display: none;
+}
+
+.specks__item--hidden {
+    visibility: hidden;
+}
+
+.specks-grid {
+    display: grid;
+    grid-template-columns: 100px 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px 100px;
+}
+
+.specks-grid__item1 {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.specks-grid__item2 {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.specks-grid__item3 {
+    grid-column: 3;
+    grid-row: 1;
+
+}
+
+.specks-grid__item4 {
+    grid-column: 4;
+    grid-row: 1;
+}
+
+.specks-grid__item5 {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.specks-grid__item6 {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.specks-grid__item7 {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+.specks-grid__item8 {
+    grid-column: 4;
+    grid-row: 2;
+}
+
+.specks-grid__item9 {
+    grid-column: 1;
+    grid-row: 3;
+}
+
+.specks-grid__item10 {
+    grid-column: 2;
+    grid-row: 3;
+}
+
+.specks-grid__item11 {
+    grid-column: 3;
+    grid-row: 3;
+}
+
+.specks-grid__item12 {
+    grid-column: 4;
+    grid-row: 3;
+}
+
+.specks-grid__item13 {
+    grid-column: 1;
+    grid-row: 4;
+}
+
+.specks-grid__item14 {
+    grid-column: 2;
+    grid-row: 4;
+}
+
+.specks-grid__item15 {
+    grid-column: 3;
+    grid-row: 4;
+}
+
+
+.specks-grid__item16 {
+    grid-column: 4;
+    grid-row: 4;
+}
