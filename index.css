@@ -1,8 +1,34 @@
+.board
+{
+    width: 448px;
+	height: 448px;
+    background-color: #d7eef6;
+}
+
 .victoryMessage
 {
 	visibility: hidden;
 	position: absolute;
-	left: 500px;
+	left: 550px;
+	top: 50px;
 	font: 100px Sans;
 	color: #B41A1A;
+}
+
+.empty
+{
+    visibility: hidden;
+}
+
+.cell
+{
+    display: inline-block;
+    width: 110px;
+    height: 110px;
+    margin: 1px;
+    font: 90px Sans;
+    background-color: #b6d4ff;
+    text-align: center;
+    color: #3a43b4;
+	cursor: pointer;
 }
