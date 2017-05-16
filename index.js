@@ -5,11 +5,11 @@ function checkPermutation(permutation) {
     e = 0;
     sum = 0;
     for (i = 0; i < permutation.length; i++) {
-        if (permutation[i] === 0)
-            e = i / 4 + 1;
+        if (permutation[i] == 0)
+            e = Math.floor(i / 4) + 1;
         else {
             for (j = i + 1; j < permutation.length; j++)
-                if (permutation[j] !== 0 && permutation[j] < permutation[i])
+                if (permutation[j] != 0 && permutation[j] < permutation[i])
                     sum++;
         }
     }
@@ -49,18 +49,18 @@ function fromPixels(value) {
 function coordinatesInside(x, y) {
     return 0 <= x && x < 4 && 0 <= y && y < 4;
 }
-function isCorrectLocation(item, x, y) { //not tested
+function isInLocation(item, x, y) {
     return item.XCoordinate == x && item.YCoordinate == y;
 }
-function swapItems(x1, y1, x2, y2) {
-    var list = document.body.getElementsByClassName('block');
+
+function swapItems(x1, y1, x2, y2, blocks) {
     var item1 = null;
     var item2 = null;
-    for (var i = 0; i < list.length; i++) {
-        if (isCorrectLocation(list[i], x1, y1))
-            item1 = list[i];
-        if (isCorrectLocation(list[i], x2, y2))
-            item2 = list[i];
+    for (var i = 0; i < blocks.length; i++) {
+        if (isInLocation(blocks[i], x1, y1))
+            item1 = blocks[i];
+        if (isInLocation(blocks[i], x2, y2))
+            item2 = blocks[i];
     }
     var textTMP = item1.textContent;
     var colorTMP = item1.style.backgroundColor;
@@ -71,22 +71,17 @@ function swapItems(x1, y1, x2, y2) {
     item2.EmptyCell = empTMP;
     item2.textContent = textTMP;
     item2.style.backgroundColor = colorTMP;
-
 }
 function isNearItem(item, x, y) {
     return (Math.abs(item.XCoordinate - x) == 1 && Math.abs(item.YCoordinate - y) == 0) ||
             (Math.abs(item.XCoordinate - x) == 0 && Math.abs(item.YCoordinate - y) == 1);
 }
-function getNearEmpty(x, y) {
-    var list = document.body.getElementsByClassName('block');
+function getNearEmpty(x, y, blocks) {
     var result = {x: -1, y: -1};
-    for (var i = 0; i < list.length; i++) {
-        if (!(x == list[i].XCoordinate &&
-                y == list[i].YCoordinate) &&
-                isNearItem(list[i], x, y) &&
-                list[i].EmptyCell) {
-            result.x = list[i].XCoordinate;
-            result.y = list[i].YCoordinate;
+    for (var i = 0; i < blocks.length; i++) {
+        if (!isInLocation(blocks[i], x, y) && isNearItem(blocks[i], x, y) && blocks[i].EmptyCell) {
+            result.x = blocks[i].XCoordinate;
+            result.y = blocks[i].YCoordinate;
             break;
         }
     }
@@ -109,18 +104,20 @@ function winAlert() {
 }
 
 function makeMove(x, y, store) {
-    blocks = store.getElementsByClassName('block');
+    blocks = store.childNodes;
+    if (x == undefined || y == undefined)
+        return;
     if (checkGameWin(blocks)) 
         return;
-    var emptyNear = getNearEmpty(x, y);
+    var emptyNear = getNearEmpty(x, y, blocks);
     if (emptyNear.x != -1)
-        swapItems(x, y, emptyNear.x, emptyNear.y);
+        swapItems(x, y, emptyNear.x, emptyNear.y, blocks);
     if (checkGameWin(blocks))
         winAlert();
 }
 function createItem(par, size, x, y, color, text, isEmpty) {
     var div = document.createElement('div');
-    div.setAttribute("class", "block");
+    div.setAttribute("class", "hiddenItem");
     var width = size;
     var height = size;
     div.XCoordinate = x;
@@ -148,15 +145,28 @@ function createField(permutation, store) {
         }
     return store;
 }
-function go15() {
-    permutation = generateNumbers(generateSinglePermutatioin);
-    createField(permutation, document.body);
+function go15(gen) {
+    permutation = generateNumbers(gen);
+    var parentNode = document.getElementById('gameField');
+    createField(permutation, parentNode);
 }
+
 function makeMouseMove(event){
     var x = event.target.XCoordinate;
     var y = event.target.YCoordinate;
-    makeMove(x, y, document.body);
+    makeMove(x, y, document.getElementById('gameField'));
 }
 
-document.body.onload = go15();
+document.body.onload = go15(generateSinglePermutatioin);
 document.body.onclick = makeMouseMove;
+
+function startGame() {
+    var div = document.getElementById('gameField');
+    div.setAttribute('class', 'visibleItem');
+    div.style.border = 'none';
+    for (x = 0; x < div.childNodes.length; x++)
+        div.childNodes[x].setAttribute("class", "visibleItem");
+    console.log(div);
+    var testItem = document.getElementById('mocha');
+    testItem.setAttribute('class', 'hiddenItem');
+}

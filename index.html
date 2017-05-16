@@ -10,7 +10,7 @@
     <!--<link href="./node_modules/mocha/mocha.css" rel="stylesheet" />-->
 </head>
 <body>
-
+    <button id="btn" onclick="startGame()">start game</button>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js"></script>
     <!--&lt;!&ndash; Тестовый отчет будет формироваться на основании этого элемента &ndash;&gt;-->
     <div id="mocha"></div>
@@ -21,7 +21,7 @@
     <!--<script src="./node_modules/chai/chai.js"></script>-->
     
     <!-- Начальное состояние для игры "Пятнашки" формируем здесь -->
-    <div id="gameField"></div>
+    <div id="gameField" class="hiddenItem"></div>
     <!-- Подключаем реализацию пятнашек -->
     <script src="./index.js"></script>
 
