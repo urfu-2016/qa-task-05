@@ -7,21 +7,25 @@
 
     <link rel="stylesheet" href="./index.css">
     <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+    <!--<link href="./node_modules/mocha/mocha.css" rel="stylesheet" />-->
 </head>
 <body>
-    <!-- Начальное состояние для игры "Пятнашки" формируем здесь -->
-
-    <!-- Тестовый отчет будет формироваться на основании этого элемента -->
+    <button id="btn" onclick="startGame()">start game</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js"></script>
+    <!--&lt;!&ndash; Тестовый отчет будет формироваться на основании этого элемента &ndash;&gt;-->
     <div id="mocha"></div>
 
-    <!-- Подключаем внешние библиотеки с CDN чтобы можно было смотреть домашку прямо с GitHub -->
+    <!--&lt;!&ndash; Подключаем внешние библиотеки с CDN чтобы можно было смотреть домашку прямо с GitHub &ndash;&gt;-->
     <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js"></script>
-
+    <!--<script src="./node_modules/mocha/mocha.js"></script>-->
+    <!--<script src="./node_modules/chai/chai.js"></script>-->
+    
+    <!-- Начальное состояние для игры "Пятнашки" формируем здесь -->
+    <div id="gameField" class="hiddenItem"></div>
     <!-- Подключаем реализацию пятнашек -->
     <script src="./index.js"></script>
 
-    <!-- Конфигурируем и запускаем тесты -->
+    <!--&lt;!&ndash; Конфигурируем и запускаем тесты &ndash;&gt;-->
     <script>mocha.setup('bdd')</script>
     <script src="./tests/index-test.js"></script>
     <script>mocha.run();</script>

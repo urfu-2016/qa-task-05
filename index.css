@@ -1,1 +1,16 @@
 /* Стили для пятнашек опишите в этом файле */
+
+body {
+    background-color: white;
+}
+
+.hiddenItem {
+    border: 0;
+    display: none;
+}
+
+.visibleItem {
+    margin: 4%;
+    border: 2px solid gray;
+    display: block;
+}
