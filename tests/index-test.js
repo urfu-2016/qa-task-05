@@ -1,4 +1,16 @@
 describe('Position solvablility checker test', function() {
+    it('should return `false` for increasing-order with first element empty', function() {
+        result = checkPermutation([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
+        chai.expect(result).to.be.false;
+    });
+    it('should return `true` for increasing-order with last element empty', function() {
+        result = checkPermutation([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0]);
+        chai.expect(result).to.be.true;
+    });
+    it('should return `true` for increasing-order with move by 15-th block', function() {
+        result = checkPermutation([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 0, 15]);
+        chai.expect(result).to.be.true;
+    });
     it('should return `false` for increasing-order with swap 15-th and 14-th block', function() {
         result = checkPermutation([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 14, 0]);
         chai.expect(result).to.be.false;
@@ -68,7 +80,6 @@ describe('Game logic test', function() {
         }
         it('should return `true` for win position', function() {
             field = createField([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0]);
-            console.log(field);
             result = checkGameWin(field);
             chai.expect(result).to.be.true;
         });
@@ -81,6 +92,37 @@ describe('Game logic test', function() {
             field = createField([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 14, 0]);
             result = checkGameWin(field);
             chai.expect(result).to.be.false;
+        });
+    });
+    describe('swap cells test', function() {
+        function checkBlocks(gameField, expectedPermutation) {
+            chai.expect(gameField.length).to.be.equal(16);
+            for (i = 0; i < 16; i++) {
+                if (expectedPermutation[i] === 0)
+                    chai.expect(gameField[i].EmptyCell).to.be.true;
+                else {
+                    chai.expect(gameField[i].textContent == expectedPermutation[i]).to.be.true;
+                    chai.expect(gameField[i].EmptyCell).to.be.false;
+                }
+            }
+        }
+        it('should swap data of adjanced empty and non empty cells', function() {
+            var store = document.createElement('div');
+            var field = createField([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 0, 14, 15], store);
+            makeMove(0, 3, field);
+            checkBlocks(store.childNodes, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 0, 13, 14, 15]);
+        });
+        it('should not do anything if cell has no adjanced empty cell', function() {
+            var store = document.createElement('div');
+            var field = createField([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 0, 14, 15], store);
+            makeMove(0, 0, field);
+            checkBlocks(store.childNodes, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 0, 14, 15]);
+        });
+        it('should not do anything if click an empty cell', function() {
+            var store = document.createElement('div');
+            var field = createField([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 0, 14, 15], store);
+            makeMove(1, 3, field);
+            checkBlocks(store.childNodes, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 0, 14, 15]);
         });
     });
 });
