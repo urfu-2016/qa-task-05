@@ -1,33 +1,91 @@
-'use strict';
+var tiles = prepareTiles();
+var directions = {up: -4, left: -1, down: 4, right: 1};
+var gameField = document.getElementById('game');
 
-var tileCount = 15;
+function prepareTiles() {
+    var tiles = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
+    tiles.unshift(0);
 
-function createTileElement(number) {
-    var div = document.createElement('div');
-    div.className = number ? "tile" : "tile-hidden";
-    div.innerText = number || '';
-
-    return div;
+    return tiles;
 }
 
-function shuffle(array) {
-    var j, temp;
-    for (var i = array.length; i; i--) {
-        j = Math.floor(Math.random() * i);
-        temp = array[i - 1];
-        array[i - 1] = array[j];
-        array[j] = temp;
+function createTiles() {
+    for (var i = 0; i < 16; i++) {
+        var tile = document.createElement('div');
+        tile.className = 'tile';
+        tile.onclick = onTileClick.bind(this, tile);
+        gameField.appendChild(tile);
     }
 }
 
-
-function createGame() {
-    var game = document.getElementById('game');
-    [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].forEach(function(number) {
-        var tile = createTileElement(number);
-        game.appendChild(tile);
-    });
-    game.appendChild(createTileElement());
+function shuffle(array) {
+    return array.sort(function() { return Math.random() - 0.5; });
 }
 
-createGame();
+function swap(array, a, b) {
+    var t = array[a]; 
+    array[a] = array[b]; 
+    array[b] = t; 
+}
+
+function isCompleted(game) {
+    return !game.some(function(value, i) { 
+        return value > 0 && value - 1 !== i; 
+    });
+}
+
+function tryMove(direction) {
+    var hole = tiles.indexOf(0);
+    var index = hole - direction;
+    
+    if (!tiles[index]) 
+        return false;
+    
+    if (direction === directions.left || direction === directions.right)
+        if (Math.floor(hole/4) !== Math.floor(index/4)) 
+            return false;
+    
+    swap(tiles, index, hole);
+    
+    return true; 
+}
+
+function render() {
+    for (var i = 0; i < 16; i++) { 
+        var tile = gameField.childNodes[i];
+        tile.textContent = tiles[i] === 0 ? '' : tiles[i];
+    } 
+}
+
+function getDirectionByClick(tile) {
+    var index = tiles.indexOf(tile);
+    return Object.keys(directions).filter(function (direction) {
+        return tiles[index + directions[direction]] === 0;
+    })[0];
+    
+}
+
+function onTileClick(tileDiv) {
+    var tileIndex = parseInt(tileDiv.textContent);
+    var direction = getDirectionByClick(tileIndex);
+    
+    var canMove = tryMove(directions[direction]);
+
+    if (canMove) {
+        render(); 
+        
+        if (isCompleted(tiles)) {
+            var winMessageDiv = document.getElementById('win-message');
+            winMessageDiv.style.visibility = 'visible';
+        }
+    }
+}
+
+function startGame() {
+    gameField.innerHTML = '';
+    createTiles();
+    tiles = prepareTiles();
+    render();
+}
+
+window.onload = startGame;
