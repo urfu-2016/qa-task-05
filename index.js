@@ -37,6 +37,7 @@ var game = (function () {
     }
 
     if (isWin) {
+      alert('Победа! Следущая игра начнется автоматически')
       restartGame()
     }
   }
@@ -59,11 +60,11 @@ var game = (function () {
   }
 
   function restartGame () {
-    alert('Победа! Следущая игра начнется автоматически')
     startGame(shuffleState(digits))
   }
 
   var $container = document.getElementById('puzzle')
+  var $restartButton = document.getElementById('restart')
   var digits = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
   var wonState = digits.concat([0])
   startGame(shuffleState(digits))
@@ -72,10 +73,11 @@ var game = (function () {
     swapElements(e.target)
   }
 
+  $restartButton.onclick = function (e) {
+    restartGame()
+  }
+
   return {
-    getElements: getElements,
-    $container: $container,
     start: startGame,
-    restart: restartGame
   }
 }())
