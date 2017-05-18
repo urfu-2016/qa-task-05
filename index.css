@@ -35,6 +35,8 @@
     font-size: 70px;
     width: 416px;
     height: 100px;
-    display: none;
     background-color: #0080ff
+}
+.displ{
+    display: none;
 }

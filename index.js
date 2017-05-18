@@ -2,7 +2,10 @@
 initGame(document.getElementsByClassName('game')[0]);
 
 function initGame(divToInsert, valuesArr) {
-    document.getElementsByClassName('winningLogo')[0].style.display = 'none';
+
+    var logo = document.getElementsByClassName('winningLogo')[0];
+    if (logo.className.indexOf(' displ') < 0)
+        document.getElementsByClassName('winningLogo')[0].className += ' displ';
 
     var cells = [];
     var sections = [];
@@ -18,7 +21,7 @@ function initGame(divToInsert, valuesArr) {
             var div = document.createElement('div');
             div.setAttribute('x', i);
             div.setAttribute('y', j);
-            div.setAttribute('onclick', 'tryToMove(this)');
+            div.addEventListener("click", function() { tryToMove(this)});
             if (i === 0 && j === 0 && valuesArr == undefined){
                 div.setAttribute('id', 'empty');
                 cells[i][j] = div;
@@ -27,12 +30,12 @@ function initGame(divToInsert, valuesArr) {
             }
             if (valuesArr == undefined){
                 var ind = Math.round(Math.random()*(values.length-1));
-                var a = values.splice(ind, 1);
+                var currValue = values.splice(ind, 1);
             }
             else
             { 
-                var a = valuesArr.shift()
-                if (a == 0){
+                var currValue = valuesArr.shift()
+                if (currValue == 0){
                     div.setAttribute('id', 'empty');
                     cells[i][j] = div;
                     section.appendChild(div);
@@ -40,7 +43,7 @@ function initGame(divToInsert, valuesArr) {
                 }
 
             }
-            div.innerHTML = a;
+            div.innerHTML = currValue;
             section.appendChild(div);
             cells[i][j] = div;
         }
@@ -53,8 +56,8 @@ function initGame(divToInsert, valuesArr) {
 }
 
 
-
 function tryToMove(cell){
+
     var cellCoords = { x: parseInt(cell.getAttribute('x')) , y: parseInt(cell.getAttribute('y'))};
     var cells = document.getElementsByClassName('game')[0].cells;
     var coords = [ {x: -1, y: 0}, {x: 1, y: 0}, {x: 0, y: -1}, {x: 0, y: 1} ];
@@ -69,11 +72,15 @@ function tryToMove(cell){
             cellToCheck.innerHTML = cell.innerHTML;
             cell.setAttribute('id', 'empty');
             cell.innerHTML = '';
+            break;
         }
     }
 
-    if (checkWin(cells))
-        document.getElementsByClassName('winningLogo')[0].style.display = 'block';
+    if (checkWin(cells)){
+        var logo = document.getElementsByClassName('winningLogo')[0];
+        var index = logo.className.indexOf(' displ');
+        logo.className = logo.className.slice(0, index);
+    }
 }
 
 function checkWin(cells){
@@ -85,7 +92,7 @@ function checkWin(cells){
         return false;
 
     var directions = [ {x: -1, y: 0}, {x: 1, y: 0}, {x: 0, y: -1}, {x: 0, y: 1} ];
-    var checkFlag = false;
+    var startPosFound = false;
     var mainDir;
     var currentPos;
     for (var i = 0; i < directions.length; i++){
@@ -95,11 +102,11 @@ function checkWin(cells){
         if (cells[eCellX + dir.x][eCellY + dir.y].innerHTML == 1){
             mainDir = dir;
             currentPos = {x: eCellX + dir.x, y: eCellY + dir.y}
-            checkFlag = true;
+            startPosFound = true;
         }
     }
 
-    if (!checkFlag)
+    if (!startPosFound)
         return false;
     var counter = 1;
     while (counter < 16){

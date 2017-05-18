@@ -1,6 +1,10 @@
 
 describe('Tag', function() {
 
+    beforeEach(() => {
+        initGame(document.getElementsByClassName('game')[0]);
+    });
+
     it('should change nothing when empty cell is clicked', () =>{
         var emptyCell = document.getElementById('empty');
         var prevPos = { x: parseInt(emptyCell.getAttribute('x')), y: parseInt(emptyCell.getAttribute('y')) };
@@ -8,8 +12,6 @@ describe('Tag', function() {
 
         var currPos = { x: parseInt(emptyCell.getAttribute('x')), y: parseInt(emptyCell.getAttribute('y')) };
         chai.assert.equal(emptyCell.id, 'empty');
-        chai.assert.equal(currPos.x, prevPos.x);
-        chai.assert.equal(currPos.y, prevPos.y);
     });
 
     it('should change nothing when cell not near is clicked', () =>{
@@ -29,8 +31,7 @@ describe('Tag', function() {
                 var currPos = {x: parseInt(cell.getAttribute('x')), y: parseInt(cell.getAttribute('y')) };
 
                 chai.assert.equal(cell.id, '');
-                chai.assert.equal(currPos.x, prevPos.x);
-                chai.assert.equal(currPos.y, prevPos.y);
+                chai.assert.equal(emptyCell.id, 'empty')
             }
         }
     });
@@ -42,29 +43,25 @@ describe('Tag', function() {
 
         var dX = eCellPos.x > 0 ? -1 : 1;
 
-        var prevCoords = { x: eCellPos.x, y : eCellPos.y };
         var cell = cells[eCellPos.x + dX][eCellPos.y];
+        cellVal = cell.innerHTML;
         cell.dispatchEvent(new MouseEvent('click'));
-        var currCoords = {x: parseInt(cell.getAttribute('x')), y: parseInt(cell.getAttribute('y')) };
 
         chai.assert.equal(cell.id, 'empty');
-        chai.assert.equal(currCoords.x, prevCoords.x + dX);
-        chai.assert.equal(currCoords.y, prevCoords.y);
+        chai.assert.equal(cell.innerHTML, '');
+        chai.assert.equal(emptyCell.id, '');
+        chai.assert.equal(emptyCell.innerHTML, cellVal);
         
 
         var emptyCell = document.getElementById('empty');
         var eCellPos = { x: parseInt(emptyCell.getAttribute('x')), y: parseInt(emptyCell.getAttribute('y')) };
-        var prevCoords = currCoords;
-        console.log(currCoords, prevCoords);
         var cell = cells[eCellPos.x - dX][eCellPos.y];
         cell.dispatchEvent(new MouseEvent('click'));
-        var currCoords = {x: parseInt(cell.getAttribute('x')), y: parseInt(cell.getAttribute('y')) };
-        console.log(currCoords, prevCoords);
 
         chai.assert.equal(cell.id, 'empty');
-        chai.assert.equal(currCoords.x, prevCoords.x - dX);
-        chai.assert.equal(currCoords.y, prevCoords.y);
-
+        chai.assert.equal(cell.innerHTML, '');
+        chai.assert.equal(emptyCell.id, '');
+        chai.assert.equal(emptyCell.innerHTML, cellVal);
     });
 
     it('should show player`s winning when right combination is figured out', () =>{
@@ -75,7 +72,7 @@ describe('Tag', function() {
         cells[0][0].dispatchEvent(new MouseEvent('click'));
         
         var winningLogo = document.getElementsByClassName('winningLogo')[0];
-        chai.assert.equal(winningLogo.style.display, "block");
+        chai.expect(winningLogo.className.indexOf('displ') < 0).to.be.true;
 
         initGame(document.getElementsByClassName('game')[0])
     });
