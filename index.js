@@ -8,29 +8,32 @@ var game = {
     },
 
     _collectData: function () {
-        this.clicked = false;
-        this.offset = 102;
-        this.$gameField = $('.js-game-field');
-        this.$rows = this.$gameField.children();
-        this.rowSelector = '.js-row';
-        this.cellSelector = '.js-cell';
-        this.spaceSelector = '.js-space';
-        this.wonBlock = '.js-won';
-        this.wonClassName = '.won';
-        this.wonAudio = '.js-won-audio';
-        this.wonTrigger = 'trigger';
+        this._clicked = false;
+        this._offset = 102;
+        this._$gameField = $('.js-game-field');
+        this._$rows = this._$gameField.children();
+        this._rowSelector = '.js-row';
+        this._cellSelector = '.js-cell';
+        this._spaceSelector = '.js-space';
+        this._winCombination = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+        this._wonBlock = '.js-won';
+        this._wonClassName = '.won';
+        this._wonAudio = '.js-won-audio';
+        this._wonTrigger = 'trigger';
     },
 
     _bindEvenets: function () {
-        this.$gameField.on('click', this.cellSelector, this._clickHandler.bind(this))
+        this._$gameField.on('click', this._cellSelector, this._clickHandler.bind(this))
     },
 
-    _initField: function () {
-        var $space = $(this.spaceSelector);
+    _initField: function (isWinCombation) {
+        this._playWonEffect(true);
+
+        var $space = $(this._spaceSelector);
 
         var cells = [];
 
-        this.$rows.each(function () {
+        this._$rows.each(function () {
             $(this).children().each(function () {
                 if ($(this).get(0) !== $space.get(0)) {
                     cells.push(this);
@@ -38,13 +41,21 @@ var game = {
             });
         });
 
-        cells.sort(function () {
-            return .5 - Math.random();
-        });
+        if (!isWinCombation) {
+            cells.sort(function () {
+                return .5 - Math.random();
+            });
 
-        cells.push($space);
+            cells.push($space);
+        } else {
+            cells.sort(function (a, b) {
+                return parseInt($(a).text(), 10) - parseInt($(b).text(), 10);
+            });
 
-        this.$rows.each(function () {
+            cells.reverse().unshift($space);
+        }
+
+        this._$rows.each(function () {
             var $row = $(this).empty();
 
             var counter = 0;
@@ -59,17 +70,17 @@ var game = {
 
         });
 
-        this.$gameField.animate({
+        this._$gameField.animate({
             opacity: 1
         }, 1000)
     },
 
     _clickHandler: function (e) {
-        if (this.clicked) {
+        if (this._clicked) {
             return;
         }
 
-        var $space = $(this.spaceSelector);
+        var $space = $(this._spaceSelector);
 
         var elemRow = this._detectRow(e.target);
         var spaceRow = this._detectRow($space);
@@ -81,33 +92,21 @@ var game = {
 
         if ((elemRow === spaceRow) && Math.abs(elemColumn - spaceColumn) === 1) {
             offset = {
-                left: '+='
+                left: '+=' + this._offset * ((elemColumn - spaceColumn) < 0 ? 1 : -1)
             };
-
-            if (elemColumn - spaceColumn < 0) {
-                offset.left += this.offset;
-            } else {
-                offset.left += this.offset * -1;
-            }
         }
 
         if ((elemColumn === spaceColumn) && Math.abs(elemRow - spaceRow) === 1) {
             offset = {
-                top: '+='
+                top: '+=' + +this._offset * ((elemRow - spaceRow) < 0 ? 1 : -1)
             };
-
-            if (elemRow - spaceRow < 0) {
-                offset.top += this.offset;
-            } else {
-                offset.top += this.offset * -1;
-            }
         }
 
         if (offset) {
-            this.clicked = true;
+            this._clicked = true;
 
             $(e.target).animate(offset, 300, function () {
-                this.clicked = false;
+                this._clicked = false;
                 this._swap(e.target, $space);
                 this._checkWin();
             }.bind(this));
@@ -116,42 +115,42 @@ var game = {
 
     _detectRow: function (elem) {
         var $elem = $(elem);
-        var $row = $elem.closest(this.rowSelector);
-        return $.inArray($row.get(0), this.$gameField.children()) + 1;
+        var $row = $elem.closest(this._rowSelector);
+        return $.inArray($row.get(0), this._$gameField.children()) + 1;
     },
 
     _detectColumn: function (elem) {
         var $elem = $(elem);
-        var $row = $elem.closest(this.rowSelector);
+        var $row = $elem.closest(this._rowSelector);
         return $.inArray($elem.get(0), $row.children()) + 1;
     },
 
     _checkWin: function () {
         var currentCombination = [];
 
-        this.$rows.each(function () {
-            var $elem = $(this);
-            $elem.children().each(function () {
+        this._$rows.each(function () {
+            var $row = $(this);
+            $row.children().each(function () {
                 currentCombination.push(parseInt($(this).text(), 10));
             });
         });
 
-        var winCombination = currentCombination.slice();
-
-        winCombination.sort(function (a, b) {
-            return a - b;
-        });
-
-        if (currentCombination.toString() === winCombination.toString()) {
-            this._playWonAudio();
+        if (currentCombination.toString() === this._winCombination.toString()) {
+            this._playWonEffect();
         }
     },
 
-    _playWonAudio: function () {
-        $(this.wonBlock).addClass(this.wonTrigger);
+    _playWonEffect: function (stop) {
+        var $wonBlock = $(this._wonBlock);
+        var $audio = $(this._wonAudio)[0];
 
-        var audio = $(this.wonAudio)[0];
-        audio.play();
+        if (!stop) {
+            $wonBlock.addClass(this._wonTrigger);
+            $audio.play();
+        } else {
+            $wonBlock.removeClass(this._wonTrigger);
+            $audio.pause();
+        }
     },
 
     _swap: function (elem_1, elem_2) {
@@ -169,6 +168,4 @@ var game = {
     }
 };
 
-$(function () {
-    game.init();
-});
+game.init();
