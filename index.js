@@ -82,12 +82,14 @@ function mix(stepCount)
     {
         var nullX = getNullPos().x;
         var nullY = getNullPos().y;
-        var horizontal = getRandomBool();
-        var upOrLeft = getRandomBool();
-        if (!horizontal && !upOrLeft) { x = nullX; y = nullY + 1; }
-        if (horizontal && !upOrLeft)  { x = nullX + 1; y = nullY; }
-        if (!horizontal && upOrLeft)  { x = nullX; y = nullY - 1; }
-        if (horizontal && upOrLeft)   { x = nullX - 1; y = nullY; }
+        var horizontal = 0;
+        if (getRandomBool())
+            horizontal = 1;
+        var downOrRight = 0;
+        if (getRandomBool())
+            downOrRight = 2;
+        x = nullX + horizontal * (downOrRight - 1);
+        y = nullY + (horizontal ^ 1) * (downOrRight - 1);
         if (0 <= x && x <= 3 && 0 <= y && y <= 3)
             this.move(x, y);
     }
