@@ -4,8 +4,9 @@ initGame(document.getElementsByClassName('game')[0]);
 function initGame(divToInsert, valuesArr) {
 
     var logo = document.getElementsByClassName('winningLogo')[0];
-    if (logo.className.indexOf(' displ') < 0)
-        document.getElementsByClassName('winningLogo')[0].className += ' displ';
+    if (!logo.classList.contains('deactivate')){
+        document.getElementsByClassName('winningLogo')[0].classList.add('deactivate');
+    }
 
     var cells = [];
     var sections = [];
@@ -78,8 +79,7 @@ function tryToMove(cell){
 
     if (checkWin(cells)){
         var logo = document.getElementsByClassName('winningLogo')[0];
-        var index = logo.className.indexOf(' displ');
-        logo.className = logo.className.slice(0, index);
+        var index = logo.classList.remove('deactivate');
     }
 }
 

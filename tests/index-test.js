@@ -1,11 +1,9 @@
 
 describe('Tag', function() {
 
-    beforeEach(() => {
-        initGame(document.getElementsByClassName('game')[0]);
-    });
-
     it('should change nothing when empty cell is clicked', () =>{
+        initGame(document.getElementsByClassName('game')[0]);
+
         var emptyCell = document.getElementById('empty');
         var prevPos = { x: parseInt(emptyCell.getAttribute('x')), y: parseInt(emptyCell.getAttribute('y')) };
         emptyCell.dispatchEvent(new MouseEvent('click'));
@@ -15,53 +13,48 @@ describe('Tag', function() {
     });
 
     it('should change nothing when cell not near is clicked', () =>{
+
+        initGame(document.getElementsByClassName('game')[0], [1,5,2,3,4,0,6,7,8,9,10,11,12,13,14,15]);
+
         var cells = document.getElementsByClassName('game')[0].cells;
-        var emptyCell = document.getElementById('empty');
-        var eCellPos = { x: parseInt(emptyCell.getAttribute('x')), y: parseInt(emptyCell.getAttribute('y')) };
         
-        for (var i = 0; i < 4; i++){
-            for (var j = 0; j < 4; j++){
-                if ((i == eCellPos.x && (Math.abs(eCellPos.y - j) < 2)) || 
-                    (j == eCellPos.y && (Math.abs(eCellPos.x - i) < 2)))
-                    continue;
-                var cell = cells[i][j];
-                var prevPos = {x: parseInt(cell.getAttribute('x')), y: parseInt(cell.getAttribute('y')) };
-                cell.dispatchEvent(new MouseEvent('click'));
+        var emptyCell = cells[1][1];
+        var cell = cells[0][2];
+        
+        cell.dispatchEvent(new MouseEvent('click'));
 
-                var currPos = {x: parseInt(cell.getAttribute('x')), y: parseInt(cell.getAttribute('y')) };
-
-                chai.assert.equal(cell.id, '');
-                chai.assert.equal(emptyCell.id, 'empty')
-            }
-        }
+        chai.assert.equal(cell.id, '');
+        chai.assert.equal(cell.innerHTML, '2');
+        chai.assert.equal(emptyCell.id, 'empty');
+        chai.assert.equal(emptyCell.innerHTML, '');
     });
 
     it('should change empty cell when a cell nearby is clicked', () =>{
+
+        initGame(document.getElementsByClassName('game')[0], [1,0,2,3,4,5,6,7,8,9,10,11,12,13,14,15]);
+
         var cells = document.getElementsByClassName('game')[0].cells;
-        var emptyCell = document.getElementById('empty');
-        var eCellPos = { x: parseInt(emptyCell.getAttribute('x')), y: parseInt(emptyCell.getAttribute('y')) };
 
-        var dX = eCellPos.x > 0 ? -1 : 1;
-
-        var cell = cells[eCellPos.x + dX][eCellPos.y];
-        cellVal = cell.innerHTML;
+        var emptyCell = cells[0][1];
+        var cell = cells[0][2];
+        
         cell.dispatchEvent(new MouseEvent('click'));
 
         chai.assert.equal(cell.id, 'empty');
         chai.assert.equal(cell.innerHTML, '');
         chai.assert.equal(emptyCell.id, '');
-        chai.assert.equal(emptyCell.innerHTML, cellVal);
+        chai.assert.equal(emptyCell.innerHTML, 2);
         
 
-        var emptyCell = document.getElementById('empty');
-        var eCellPos = { x: parseInt(emptyCell.getAttribute('x')), y: parseInt(emptyCell.getAttribute('y')) };
-        var cell = cells[eCellPos.x - dX][eCellPos.y];
+        var emptyCell = cells[0][2];
+        var cell = cells[0][1];
+        
         cell.dispatchEvent(new MouseEvent('click'));
 
         chai.assert.equal(cell.id, 'empty');
         chai.assert.equal(cell.innerHTML, '');
         chai.assert.equal(emptyCell.id, '');
-        chai.assert.equal(emptyCell.innerHTML, cellVal);
+        chai.assert.equal(emptyCell.innerHTML, 2);
     });
 
     it('should show player`s winning when right combination is figured out', () =>{
