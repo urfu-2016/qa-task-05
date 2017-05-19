@@ -107,7 +107,7 @@ var game = {
 
             $(e.target).animate(offset, 300, function () {
                 this._clicked = false;
-                this._swap(e.target, $space);
+                this._swapAndRemoveStyleAttr(e.target, $space);
                 this._checkWin();
             }.bind(this));
         }
@@ -153,7 +153,7 @@ var game = {
         }
     },
 
-    _swap: function (elem_1, elem_2) {
+    _swapAndRemoveStyleAttr: function (elem_1, elem_2) {
         var $elem_1 = $(elem_1);
         var $elem_2 = $(elem_2);
 
