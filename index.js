@@ -33,10 +33,10 @@ var game = {
 
         var cells = [];
 
-        this._$rows.each(function () {
-            $(this).children().each(function () {
-                if ($(this).get(0) !== $space.get(0)) {
-                    cells.push(this);
+        this._$rows.each(function (indexOuter, row) {
+            $(row).children().each(function (indexInner, cell) {
+                if ($(cell).get(0) !== $space.get(0)) {
+                    cells.push(cell);
                 }
             });
         });
@@ -55,8 +55,8 @@ var game = {
             cells.reverse().unshift($space);
         }
 
-        this._$rows.each(function () {
-            var $row = $(this).empty();
+        this._$rows.each(function (index, row) {
+            var $row = $(row).empty();
 
             var counter = 0;
 
@@ -128,10 +128,10 @@ var game = {
     _checkWin: function () {
         var currentCombination = [];
 
-        this._$rows.each(function () {
-            var $row = $(this);
-            $row.children().each(function () {
-                currentCombination.push(parseInt($(this).text(), 10));
+        this._$rows.each(function (indexOuter, row) {
+            var $row = $(row);
+            $row.children().each(function (indexInner, cell) {
+                currentCombination.push(parseInt($(cell).text(), 10));
             });
         });
 
