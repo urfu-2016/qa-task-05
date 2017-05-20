@@ -38,7 +38,7 @@ describe('Game ui tests', function() {
     it('should render "result" is empty', function () {
         document.getElementById('game-field').childNodes[2].click();
         var result = document.getElementById('result');
-        result.innerText.should.be.not.equal('Вы выиграли!');
+        result.innerText.should.be.equal('');
     });
 
     it('should render "Вы выиграли!" when game complete', function () {
@@ -46,18 +46,6 @@ describe('Game ui tests', function() {
                                5, 6, 7, 8,
                                9, 10, 11, 12,
                                13, 14, 0, 15];
-        render();
-        document.getElementById('game-field').childNodes[15].click();
-
-        var result = document.getElementById('result');
-        result.innerText.should.be.equal('Вы выиграли!');
-    });
-
-    it('nothing should happen when click on empty', function () {
-        currentCombination = [1, 2, 3, 4,
-                                5, 6, 7, 8,
-                                9, 10, 11, 12,
-                                13, 14, 0, 15];
         render();
         document.getElementById('game-field').childNodes[15].click();
 
