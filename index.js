@@ -38,7 +38,7 @@ function checkWin(board) {
   return true;
 }
 
-function canMoveCell(x, y) {
+function getMoveCell(x, y) {
   if (board[x + 1] && board[x + 1][y] === 0) {
     board[x + 1][y] = board[x][y];
     board[x][y] = 0;
@@ -64,7 +64,7 @@ function canMoveCell(x, y) {
 function clickOnBoard(event) {
   var cellNode = event.target.closest('.cell');
   var cell = cellNode.className.match(/ (.+)/)[1].split('-');
-  var move = canMoveCell(parseInt(cell[0]), parseInt(cell[1]));
+  var move = getMoveCell(parseInt(cell[0]), parseInt(cell[1]));
   var sign = 1;
 
   if (move) {
@@ -73,13 +73,13 @@ function clickOnBoard(event) {
         sign = -1;
         break;
       case 'right':
-        move.type = 'left';
+        move.type = 'left'; // потому что работает только с left/top
         break;
       case 'top':
         sign = -1;
         break;
       case 'bottom':
-        move.type = 'top';
+        move.type = 'top'; // потому что работает только с left/top
         break;
     }
     if (Number.isNaN(parseInt(cellNode.style[move.type]))) {
@@ -98,7 +98,7 @@ function clickOnBoard(event) {
   }
 }
 
-function printBoard(board, needMargin) {
+function createBoard(board, needMargin) {
   var boardDiv = document.getElementsByClassName('board')[0];
   boardDiv.innerHTML = '';
   for (var i = 1; i <= 4; i++) {
@@ -129,13 +129,13 @@ function startGame() {
   shuffle(randoms);
   randoms.unshift(0);
   board = []
-  for (var i = 1; i <= 4; i++) {
-    board[i - 1] = []
-    for (var j = 1; j <= 4; j++) {
-      board[i - 1][j - 1] = randoms[4 * (i - 1) + (j - 1)];
+  for (var i = 0; i < 4; i++) {
+    board[i] = []
+    for (var j = 0; j < 4; j++) {
+      board[i][j] = randoms[4 * i + j];
     }
   }
-  printBoard(board, true);
+  createBoard(board, true);
 }
 
 startGame();
