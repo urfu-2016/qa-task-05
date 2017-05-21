@@ -33,3 +33,11 @@ body, html {
 .button:hover {
     background-color: #e7e7e7;
 }
+
+.hidden {
+    visibility: hidden !important;
+}
+
+.visible {
+    visibility: visible !important;
+}
