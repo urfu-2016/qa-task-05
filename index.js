@@ -16,9 +16,9 @@ var game = {
         this._cellSelector = '.js-cell';
         this._spaceSelector = '.js-space';
         this._winCombination = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
-        this._wonBlock = '.js-won';
+        this._$wonBlock = $('.js-won');
         this._wonClassName = '.won';
-        this._wonAudio = '.js-won-audio';
+        this._$wonAudio = $('.js-won-audio')[0];
         this._wonTrigger = 'trigger';
     },
 
@@ -27,7 +27,7 @@ var game = {
     },
 
     _initField: function (isWinCombation) {
-        this._playWonEffect(true);
+        this._stopAudioEffect();
 
         var $space = $(this._spaceSelector);
 
@@ -140,17 +140,14 @@ var game = {
         }
     },
 
-    _playWonEffect: function (stop) {
-        var $wonBlock = $(this._wonBlock);
-        var $audio = $(this._wonAudio)[0];
+    _playWonEffect: function () {
+        this._$wonBlock.addClass(this._wonTrigger);
+        this._$wonAudio.play();
+    },
 
-        if (!stop) {
-            $wonBlock.addClass(this._wonTrigger);
-            $audio.play();
-        } else {
-            $wonBlock.removeClass(this._wonTrigger);
-            $audio.pause();
-        }
+    _stopAudioEffect: function () {
+        this._$wonBlock.removeClass(this._wonTrigger);
+        this._$wonAudio.pause();
     },
 
     _swapAndRemoveStyleAttr: function (elem_1, elem_2) {

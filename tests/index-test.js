@@ -67,7 +67,14 @@ describe('Game tests', function () {
 
     it('should execute win action after move cell', function () {
         game._initField(true);
-        game._checkWin();
+
+        var cell = document.getElementsByClassName('js-cell')[14];
+
+        cell.click();
+
+        var cellAfterClick = document.getElementsByClassName('js-cell')[15];
+
+        cellAfterClick.click();
 
         var wonBlock = document.getElementsByClassName('js-won')[0];
 
