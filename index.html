@@ -1,29 +1,60 @@
 <!doctype html>
 <html>
-<head>
-    <meta charset="utf-8">
+    <head>
+        <meta charset="utf-8">
 
-    <title>Пятнашки</title>
+        <title>Пятнашки</title>
 
-    <link rel="stylesheet" href="./index.css">
-    <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
-</head>
-<body>
-    <!-- Начальное состояние для игры "Пятнашки" формируем здесь -->
+        <link href="./index.css" rel="stylesheet">
+        <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
+    </head>
+    <body>
+        <main class="container">
+            <section class="won js-won">
+                <h1 class="won__h1">MISSION PASSED !</h1>
+                <h2 class="won__h2">RESPECT +</h2>
+                <audio class="won__audio js-won-audio">
+                    <source src="won.mp3" type="audio/mpeg">
+                </audio>
+            </section>
+            <section class="game-field js-game-field">
+                <div class="row js-row">
+                    <div class="cell space js-cell js-space">16</div>
+                    <div class="cell js-cell">1</div>
+                    <div class="cell js-cell">2</div>
+                    <div class="cell js-cell">3</div>
+                </div>
+                <div class="row js-row">
+                    <div class="cell js-cell">4</div>
+                    <div class="cell js-cell">5</div>
+                    <div class="cell js-cell">6</div>
+                    <div class="cell js-cell">7</div>
+                </div>
+                <div class="row js-row">
+                    <div class="cell js-cell">8</div>
+                    <div class="cell js-cell">9</div>
+                    <div class="cell js-cell">10</div>
+                    <div class="cell js-cell">11</div>
+                </div>
+                <div class="row js-row">
+                    <div class="cell js-cell">12</div>
+                    <div class="cell js-cell">13</div>
+                    <div class="cell js-cell">14</div>
+                    <div class="cell js-cell">15</div>
+                </div>
+            </section>
+        </main>
 
-    <!-- Тестовый отчет будет формироваться на основании этого элемента -->
-    <div id="mocha"></div>
+        <section id="mocha"></section>
 
-    <!-- Подключаем внешние библиотеки с CDN чтобы можно было смотреть домашку прямо с GitHub -->
-    <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js"></script>
+        <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-    <!-- Подключаем реализацию пятнашек -->
-    <script src="./index.js"></script>
+        <script src="./index.js"></script>
 
-    <!-- Конфигурируем и запускаем тесты -->
-    <script>mocha.setup('bdd')</script>
-    <script src="./tests/index-test.js"></script>
-    <script>mocha.run();</script>
-</body>
+        <script>mocha.setup('bdd')</script>
+        <script src="./tests/index-test.js"></script>
+        <script>mocha.run()</script>
+    </body>
 </html>
